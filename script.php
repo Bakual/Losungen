@@ -1,6 +1,6 @@
 <?php
 /**
- * @package         BibleLinkXT
+ * @package         HerrnhuterLosungen
  * @author          Thomas Hunziker <admin@sermonspeaker.net>
  * @copyright   (C) 2015 - Thomas Hunziker
  * @license         http://www.gnu.org/licenses/gpl.html
@@ -9,11 +9,11 @@
 defined('_JEXEC') or die();
 
 /**
- * Class Plg_BiblelinkxtInstallerScript
+ * Class Mod_herrnhuter_losungenInstallerScript
  *
- * @since  1.0.2
+ * @since  1.0.0
  */
-class PlgContentBiblelinkxtInstallerScript
+class Mod_herrnhuter_losungenInstallerScript
 {
 	/**
 	 * method to run before an install/update/uninstall method
@@ -31,7 +31,7 @@ class PlgContentBiblelinkxtInstallerScript
 
 		if (!$jversion->isCompatible($min_version))
 		{
-			JFactory::getApplication()->enqueueMessage(JText::sprintf('PLG_CONTENT_BIBLELINK_XT_VERSION_UNSUPPORTED', $min_version), 'error');
+			JFactory::getApplication()->enqueueMessage(JText::sprintf('MOD_HERRNHUTER_VERSION_UNSUPPORTED', $min_version), 'error');
 
 			return false;
 		}
