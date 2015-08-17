@@ -16,7 +16,7 @@
 defined('_JEXEC') or die;
 
     $version = "131128";
-    $modulname = "mod_herrnhuter_losungen_xml_J3.x";
+    $modulname = "mod_herrnhuter_losungen";
 
 	$ausgabe 					= "";
 	$arbeitsstring 				= "";
@@ -31,12 +31,12 @@ defined('_JEXEC') or die;
     $datumssuche        		= $today = date("Y") . "-" . $today = date("m") . "-" . $today = date("d") . "T00:00:00";
     $copyright_filename 		= $modulname . ".html";
     if (substr($mosConfig_live_site, -1, 1) == "/") {
-        $livesitemodulepfad 	= $mosConfig_live_site . "modules/mod_herrnhuter_losungen_xml_J3.x/";
+        $livesitemodulepfad 	= $mosConfig_live_site . "modules/mod_herrnhuter_losungen/";
     }else{
-         $livesitemodulepfad 	= $mosConfig_live_site . "/modules/mod_herrnhuter_losungen_xml_J3.x/";
+         $livesitemodulepfad 	= $mosConfig_live_site . "/modules/mod_herrnhuter_losungen/";
     }
    
-    $copyright_file     = $mosConfig_absolute_path ."/modules/mod_herrnhuter_losungen_xml_J3.x/" . $copyright_filename;
+    $copyright_file     = $mosConfig_absolute_path ."/modules/mod_herrnhuter_losungen/" . $copyright_filename;
 
     $modid              = $module->id;
 
@@ -147,9 +147,9 @@ defined('_JEXEC') or die;
 		JHTML::_( 'behavior.modal' );
 	}
 	
-   // *****Cachefile löschen!
+   // *****Cachefile lï¿½schen!
     if ($los_cache_file_del == "1" or $copyright_file_neu == 1) {
-        // gesamten Joomlacache löschen bis auf index.html
+        // gesamten Joomlacache lï¿½schen bis auf index.html
         $handle = opendir($los_cache_dir);
         while ($file = readdir ($handle)) {
             if($file != "." && $file != "..") {
@@ -184,7 +184,7 @@ defined('_JEXEC') or die;
     // kein Cachefile nutzen bzw. neu erstellen
     }else{
 
-        // Prüfung XML-Losung vorhanden
+        // Prï¿½fung XML-Losung vorhanden
         if (file_exists($losungsverzeichnis)) {
             $OpenFile = fopen($losungsverzeichnis, "r");
 
@@ -193,7 +193,7 @@ defined('_JEXEC') or die;
                 $arbeitsstring .= fread($OpenFile, filesize ($losungsverzeichnis));
                 fclose($OpenFile);
 
-                // Steuerzeichen löschen
+                // Steuerzeichen lï¿½schen
                 for($i=0; $i<15; $i++) {
                     $arbeitsstring = str_replace (chr($i), "", $arbeitsstring);
                 }
@@ -207,9 +207,9 @@ defined('_JEXEC') or die;
                 if ($datum_on == 1) {
                     $taglang = array("Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag");
                     $tagkurz = array("So","Mo","Di","Mi","Do","Fr","Sa");
-                    $Monatlang = array("","Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember");
-                    $MonatlangOE1 = array("","Jänner","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember");
-                    $MonatlangOE2 = array("","Jänner","Feber","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember");
+                    $Monatlang = array("","Januar","Februar","Mï¿½rz","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember");
+                    $MonatlangOE1 = array("","Jï¿½nner","Februar","Mï¿½rz","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember");
+                    $MonatlangOE2 = array("","Jï¿½nner","Feber","Mï¿½rz","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember");
 
                     switch ($datumselect) {
 
@@ -266,51 +266,51 @@ defined('_JEXEC') or die;
                          $datum = date("d") . "." . date("m") . "." . date("y");
                          break;
                     case 12:
-                         //*  Dienstag, 1. Jänner(Februar) 2013
+                         //*  Dienstag, 1. Jï¿½nner(Februar) 2013
                          $datum = $taglang[date("w")] . ", " . date("d") . ". " . $MonatlangOE1[date("n")] . " " . date("Y");
                          break;
                     case 13:
-                         //*  Dienstag, 1. Jänner(Februar) 13
+                         //*  Dienstag, 1. Jï¿½nner(Februar) 13
                          $datum = $taglang[date("w")] . ", " . date("d") . ". " . $MonatlangOE1[date("n")] . " " . date("y");
                          break;
                     case 14:
-                         //*  Di 1. Jänner(Februar) 2013
+                         //*  Di 1. Jï¿½nner(Februar) 2013
                          $datum = $tagkurz[date("w")] . " " . date("d") . ". " . $MonatlangOE1[date("n")] . " " . date("Y");
                          break;
                     case 15:
-                         //*  Di 1. Jänner(Februar) 13
+                         //*  Di 1. Jï¿½nner(Februar) 13
                          $datum = $tagkurz[date("w")] . " " . date("d") . ". " . $MonatlangOE1[date("n")] . " " . date("y");
                          break;
                     case 16:
-                         //*  1. Jänner(Februar) 2013
+                         //*  1. Jï¿½nner(Februar) 2013
                          $datum = date("d") . ". " . $MonatlangOE1[date("n")] . " " . date("Y");
                          break;
                     case 17:
-                         //*  1. Jänner(Februar) 13
+                         //*  1. Jï¿½nner(Februar) 13
                          $datum = date("d") . ". " . $MonatlangOE1[date("n")] . " " . date("y");
                          break;
                     case 18:
-                         //*  Dienstag, 1. Jänner(Feber) 2013
+                         //*  Dienstag, 1. Jï¿½nner(Feber) 2013
                          $datum = $taglang[date("w")] . ", " . date("d") . ". " . $MonatlangOE2[date("n")] . " " . date("Y");
                          break;
                     case 19:
-                         //*  Dienstag, 1. Jänner(Feber) 13
+                         //*  Dienstag, 1. Jï¿½nner(Feber) 13
                          $datum = $taglang[date("w")] . ", " . date("d") . ". " . $MonatlangOE2[date("n")] . " " . date("y");
                          break;
                     case 20:
-                         //*  Di 1. Jänner(Feber) 2013
+                         //*  Di 1. Jï¿½nner(Feber) 2013
                          $datum = $tagkurz[date("w")] . " " . date("d") . ". " . $MonatlangOE2[date("n")] . " " . date("Y");
                          break;
                     case 21:
-                         //*  Di 1. Jänner(Feber) 13
+                         //*  Di 1. Jï¿½nner(Feber) 13
                          $datum = $tagkurz[date("w")] . " " . date("d") . ". " . $MonatlangOE2[date("n")] . " " . date("y");
                          break;
                     case 22:
-                         //*  1. Jänner(Feber) 2013
+                         //*  1. Jï¿½nner(Feber) 2013
                          $datum = date("d") . ". " . $MonatlangOE2[date("n")] . " " . date("Y");
                          break;
                     case 23:
-                         //*  1. Jänner(Feber) 13
+                         //*  1. Jï¿½nner(Feber) 13
                          $datum = date("d") . ". " . $MonatlangOE2[date("n")] . " " . date("y");
                          break;
                     }
@@ -360,13 +360,13 @@ defined('_JEXEC') or die;
 			
                 if ($bibel_on == 1) {
 					if($popup_bib_on == "0") { // neues Fenster
-						$losung_txt_vers = "<div class=\"los_" . $modid . "_losungtxt_link\"><a title=\"Bibelabschnitt im neuem Fenster öffnen\" href=\"http://www.bibleserver.com/index.php?language=1&s=1#/text/$bibel_version/$losung_txt_vers\" target=\"_blank\" class=\"los_" . $modid . "_losungtxt_link\">$losung_txt_vers</a></div>\n";
+						$losung_txt_vers = "<div class=\"los_" . $modid . "_losungtxt_link\"><a title=\"Bibelabschnitt im neuem Fenster ï¿½ffnen\" href=\"http://www.bibleserver.com/index.php?language=1&s=1#/text/$bibel_version/$losung_txt_vers\" target=\"_blank\" class=\"los_" . $modid . "_losungtxt_link\">$losung_txt_vers</a></div>\n";
 					}
 					if($popup_bib_on == "1") { // PopUp
-						$losung_txt_vers = "<div class=\"los_" . $modid . "_losungtxt_link\"><a title=\"Bibelabschnitt im neuem Fenster öffnen\" href=\"http://www.bibleserver.com/index.php?language=1&s=1#/text/$bibel_version/$losung_txt_vers\" target=\"_blank\" class=\"los_" . $modid . "_losungtxt_link\" onclick=\"Popup=window.open('http://www.bibleserver.com/index.php?language=1&s=1#/text/$bibel_version/$losung_txt_vers','popup','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=$popup_bib_width,height=$popup_bib_height,left='+(screen.availWidth/2-($popup_bib_width/2))+',top='+(screen.availHeight/2-($popup_bib_height/2))+'');return false;\">$losung_txt_vers</a></div>\n";
+						$losung_txt_vers = "<div class=\"los_" . $modid . "_losungtxt_link\"><a title=\"Bibelabschnitt im neuem Fenster ï¿½ffnen\" href=\"http://www.bibleserver.com/index.php?language=1&s=1#/text/$bibel_version/$losung_txt_vers\" target=\"_blank\" class=\"los_" . $modid . "_losungtxt_link\" onclick=\"Popup=window.open('http://www.bibleserver.com/index.php?language=1&s=1#/text/$bibel_version/$losung_txt_vers','popup','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=$popup_bib_width,height=$popup_bib_height,left='+(screen.availWidth/2-($popup_bib_width/2))+',top='+(screen.availHeight/2-($popup_bib_height/2))+'');return false;\">$losung_txt_vers</a></div>\n";
 					}
 					if($popup_bib_on == "2") { // Lightbox
-						$losung_txt_vers = "<div class=\"los_" . $modid . "_losungtxt_link\"><a title=\"Bibelabschnitt im neuem Fenster öffnen\" href=\"http://www.bibleserver.com/index.php?language=1&s=1#/text/$bibel_version/$losung_txt_vers\" class=\"modal los_" . $modid . "_losungtxt_link\" target=\"_blank\" $popup_bib>$losung_txt_vers</a></div>\n";  
+						$losung_txt_vers = "<div class=\"los_" . $modid . "_losungtxt_link\"><a title=\"Bibelabschnitt im neuem Fenster ï¿½ffnen\" href=\"http://www.bibleserver.com/index.php?language=1&s=1#/text/$bibel_version/$losung_txt_vers\" class=\"modal los_" . $modid . "_losungtxt_link\" target=\"_blank\" $popup_bib>$losung_txt_vers</a></div>\n";  
 					}
 
                 }else{
@@ -375,20 +375,20 @@ defined('_JEXEC') or die;
 
                 if ($bibel_on == 1) {
 					if($popup_bib_on == "0") { // neues Fenster
-						$lehr_txt_vers = "<div class=\"los_" . $modid . "_lehrtxt_link\"><a title=\"Bibelabschnitt im neuem Fenster öffnen\" href=\"http://www.bibleserver.com/index.php?language=1&s=1#/text/$bibel_version/$lehr_txt_vers\" target=\"_blank\" class=\"los_" . $modid . "_lehrtxt_link\">$lehr_txt_vers</a></div>\n";
+						$lehr_txt_vers = "<div class=\"los_" . $modid . "_lehrtxt_link\"><a title=\"Bibelabschnitt im neuem Fenster ï¿½ffnen\" href=\"http://www.bibleserver.com/index.php?language=1&s=1#/text/$bibel_version/$lehr_txt_vers\" target=\"_blank\" class=\"los_" . $modid . "_lehrtxt_link\">$lehr_txt_vers</a></div>\n";
 					}
 					if($popup_bib_on == "1") { // PopUp
-						$lehr_txt_vers = "<div class=\"los_" . $modid . "_lehrtxt_link\"><a title=\"Bibelabschnitt im neuem Fenster öffnen\" href=\"http://www.bibleserver.com/index.php?language=1&s=1#/text/$bibel_version/$lehr_txt_vers\" target=\"_blank\" class=\"los_" . $modid . "_lehrtxt_link\" onclick=\"Popup=window.open('http://www.bibleserver.com/index.php?language=1&s=1#/text/$bibel_version/$lehr_txt_vers','popup','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=$popup_bib_width,height=$popup_bib_height,left='+(screen.availWidth/2-($popup_bib_width/2))+',top='+(screen.availHeight/2-($popup_bib_height/2))+'');return false;\">$lehr_txt_vers</a></div>\n";
+						$lehr_txt_vers = "<div class=\"los_" . $modid . "_lehrtxt_link\"><a title=\"Bibelabschnitt im neuem Fenster ï¿½ffnen\" href=\"http://www.bibleserver.com/index.php?language=1&s=1#/text/$bibel_version/$lehr_txt_vers\" target=\"_blank\" class=\"los_" . $modid . "_lehrtxt_link\" onclick=\"Popup=window.open('http://www.bibleserver.com/index.php?language=1&s=1#/text/$bibel_version/$lehr_txt_vers','popup','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=$popup_bib_width,height=$popup_bib_height,left='+(screen.availWidth/2-($popup_bib_width/2))+',top='+(screen.availHeight/2-($popup_bib_height/2))+'');return false;\">$lehr_txt_vers</a></div>\n";
 					}
 					if($popup_bib_on == "2") { // Lightbox
-						$lehr_txt_vers = "<div class=\"los_" . $modid . "_lehrtxt_link\"><a title=\"Bibelabschnitt im neuem Fenster öffnen\" href=\"http://www.bibleserver.com/index.php?language=1&s=1#/text/$bibel_version/$lehr_txt_vers\" class=\"modal los_" . $modid . "_lehrtxt_link\" target=\"_blank\"$popup_bib>$lehr_txt_vers</a></div>\n";
+						$lehr_txt_vers = "<div class=\"los_" . $modid . "_lehrtxt_link\"><a title=\"Bibelabschnitt im neuem Fenster ï¿½ffnen\" href=\"http://www.bibleserver.com/index.php?language=1&s=1#/text/$bibel_version/$lehr_txt_vers\" class=\"modal los_" . $modid . "_lehrtxt_link\" target=\"_blank\"$popup_bib>$lehr_txt_vers</a></div>\n";
 					}
 
                 }else{
                     $lehr_txt_vers = "<div class=\"los_" . $modid . "_lehrtxt_link\">$lehr_txt_vers</div>\n";
                 }
 
-                // Sonntag über Datum anzeigen
+                // Sonntag ï¿½ber Datum anzeigen
                 if ($sonntag_on == 1) {
                     $ausgabe .= $sonntag_txt;
                 }
@@ -559,9 +559,9 @@ defined('_JEXEC') or die;
         }
     }
 
-    // ***** copyrightfile löschen?
+    // ***** copyrightfile lï¿½schen?
     if($copyright_file_neu == 1) {
-        // copyrightfile löschen!
+        // copyrightfile lï¿½schen!
         if (file_exists($copyright_file)) {
             unlink($copyright_file);
         }
@@ -623,7 +623,7 @@ $dummy = "{\"los_cache_file_del\":\""        .  $params->set('los_cache_file_del
 
     }
 
-    // ***** Erstellung / Prüfung der mod_herrnhuter_losungen_xml_J3.x.html
+    // ***** Erstellung / PrÃ¼fung der mod_herrnhuter_losungen.html
     if (file_exists($copyright_file)) {
         $infohtml = "";
     }else{
@@ -644,7 +644,7 @@ $dummy = "{\"los_cache_file_del\":\""        .  $params->set('los_cache_file_del
          "    <meta http-equiv=\"content-type\" content=\"text/html;charset=iso-8859-1\">\n" .
          "    <title>Copyright-Hinweise $modulname $version</title>\n" .
          "    <meta name=\"author\" content=\"Dietmar Isenbart * Ichthys-Soft - Freeware * http://di-side.de *\">\n" .
-         "    <meta name=\"description\" content=\"Copyright-Hinweise zu den Losungen der Evangelischen Br&uuml;der-Unit&auml;t Herrnhut und dem mod_herrnhuter_losungen_xml_J3.x\" >\n";
+         "    <meta name=\"description\" content=\"Copyright-Hinweise zu den Losungen der Evangelischen Br&uuml;der-Unit&auml;t Herrnhut und dem mod_herrnhuter_losungen\" >\n";
 
     if($templatecss_on == 1) {
         $infohtml .= "\n    <link rel=\"stylesheet\" href=\"$mosConfig_live_site" . "templates/$cur_template/css/template.css\" type=\"text/css\"/>";

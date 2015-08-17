@@ -18,33 +18,53 @@
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
-				<field name="@Losungscache" type="spacer" default=""
-					label="&lt;b&gt;&lt;i&gt;| Losungscache |&lt;/i&gt;&lt;/b&gt;" description=""></field>
-				<field name="los_cache_file_del" type="radio" default="0" label="Cache löschen"
-					description="Wenn oben &lt;b&gt;Losungscache benutzen&lt;/b&gt; aktiv ist, muss nach jeder Einstellungsänderung &lt;b&gt;Losungscache löschen&lt;/b&gt; aktiviert werden und &lt;b&gt;Anwenden&lt;/b&gt; bzw. &lt;b&gt;Speichern&lt;/b&gt; angeklickt- und das Frontend-Browserfenster aktualisiert werden, damit sich die Einstellungen auch auf die Ansicht auswirken.&lt;br /&gt;&lt;br /&gt;Diese Funktion löscht gleichzeitig den gesamten Joomlacache.">
-					<option value="0">Nein</option>
-					<option value="1">Ja</option>
+				<field
+					name="los_cache_file_del"
+					type="radio"
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LOS_CACHE_FILE_DEL_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LOS_CACHE_FILE_DEL_DESC"
+					class="btn-group btn-group-yesno"
+					default="0"
+					>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
 				</field>
-				<field name="@Pfad" type="spacer" default="" label="&lt;b&gt;&lt;i&gt;| Pfad |&lt;/i&gt;&lt;/b&gt;"
-					description=""></field>
-				<field name="losungspfad" type="text" default="" size="60" label="Pfad Losungsdaten"
-					description="In welchem Verzeichnis, ausgehend vom Joomlaroot, befindet sich die Datei:&lt;br /&gt;&lt;br /&gt;&lt;b&gt;Losungen Free XXXX.xml&lt;/b&gt;&lt;br /&gt;(XXXX = 2013; aktuelles Jahr)&lt;br /&gt;&lt;br /&gt;!!! Nur das Verzeichnis angeben &lt;b&gt;OHNE&lt;/b&gt; vorangestelltem-, aber &lt;b&gt;MIT&lt;/b&gt; abschließendem Slash (/) !!!&lt;br /&gt;&lt;br /&gt;Beispiel:&lt;br /&gt;Joomlaroot = ()&lt;br /&gt;Joomlaroot/losung = (losung/)"></field>
-				<field name="@Kodierung" type="spacer" default=""
-					label="&lt;b&gt;&lt;i&gt;| Kodierung |&lt;/i&gt;&lt;/b&gt;" description=""></field>
-				<field name="char_set" type="radio" default="UTF-8" label="Zeichenkodierung"
-					description="Hier kann die Darstellung der Umlaute im Losungsmodul verändert werden.&lt;br /&gt;&lt;br /&gt;Wenn im Frontend die Umlaute als kryptische Zeichen erscheinen, muss die andere Option aktiviert werden.">
-					<option value="ISO-8859-1">ISO-8859-1</option>
+				<field
+					name="losungspfad"
+					type="text"
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LOSUNGSPFAD_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LOSUNGSPFAD_DESC"
+				/>
+				<field
+					name="char_set"
+					type="radio"
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_CHAR_SET_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_CHAR_SET_DESC"
+					class="btn-group"
+					default="UTF-8"
+					>
 					<option value="UTF-8">UTF-8</option>
+					<option value="ISO-8859-1">ISO-8859-1</option>
 				</field>
-				<field name="@Datum" type="spacer" default="" label="&lt;b&gt;&lt;i&gt;| Datum |&lt;/i&gt;&lt;/b&gt;"
-					description=""></field>
-				<field name="datum_on" type="radio" default="1" label="Datum anzeigen"
-					description="Soll das Datum angezeigt werden?">
-					<option value="0">Nein</option>
-					<option value="1">Ja</option>
+				<field
+					name="datum_on"
+					type="radio"
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_DATUM_ON_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_DATUM_ON_DESC"
+					class="btn-group btn-group-yesno"
+					default="1"
+					>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
 				</field>
-				<field name="datumselect" type="list" default="0" label="Datumformat"
-					description="Wenn hier der Punkt &lt;b&gt;Zusatztext statt Datum verwenden&lt;/b&gt; ausgewählt wird, muss &lt;b&gt;Datum anzeigen&lt;/b&gt; auf &lt;b&gt;Ja&lt;/b&gt; gesetzt werden, damit im Frontendmodul der Zusatztext auch angezeigt wird.">
+				<field
+					name="datumselect"
+					type="list"
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_DATUMSELECT_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_DATUMSELECT_DESC"
+					default="0"
+					showon="datum_on:1"
+					>
 					<option value="0">Dienstag, 1. Januar 2013</option>
 					<option value="1">Dienstag, 1. Januar 13</option>
 					<option value="2">Di 1. Januar 2013</option>
@@ -71,21 +91,37 @@
 					<option value="23">1. Jänner bzw. Feber 13</option>
 					<option value="24">Zusatztext statt Datum verwenden</option>
 				</field>
-				<field name="@Zusatztext" type="spacer" default=""
-					label="&lt;b&gt;&lt;i&gt;| Zusatztext |&lt;/i&gt;&lt;/b&gt;" description=""></field>
-				<field name="zusatztext_on" type="radio" default="1" label="Zusatztext anzeigen"
-					description="Soll der Zusatztext dem Datum vorangestellt- bzw. angehängt werden?&lt;br /&gt;&lt;br /&gt;Wenn bei &lt;b&gt;Datumformat&lt;/b&gt; der Punkt &lt;b&gt;Zusatztext statt Datum verwenden&lt;/b&gt; ausgewählt ist, wird im Frontendmodul nur der Zusatztext angezeigt.">
-					<option value="0">Kein Zusatztext</option>
-					<option value="1">Dem Datum voranstellen</option>
-					<option value="2">An das Datum anhängen</option>
+				<field
+					name="zusatztext_on"
+					type="radio"
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_ZUSATZTEXT_ON_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_ZUSATZTEXT_ON_DESC"
+					class="btn-group"
+					default="1"
+					>
+					<option value="0">MOD_HERRNHUTER_LOSUNGEN_FIELDS_ZUSATZTEXT_ON_OPTION_0</option>
+					<option value="1">MOD_HERRNHUTER_LOSUNGEN_FIELDS_ZUSATZTEXT_ON_OPTION_1</option>
+					<option value="2">MOD_HERRNHUTER_LOSUNGEN_FIELDS_ZUSATZTEXT_ON_OPTION_2</option>
 				</field>
-				<field name="zusatztext" type="text" default="Tageslosung von" size="80" label="gewünschter Zusatztext"
-					description="Hier den gewünschten Zusatztext eingeben, der dem Datum vorangestellt bzw. statt des Datums angezeigt werden soll.&lt;br /&gt;&lt;br /&gt;Default ist:&lt;br /&gt;Tageslosung von"></field>
-				<field name="sonntag_on" type="radio" default="2" label="Sonntag anzeigen"
-					description="Sollen die Sonntage des Kirchenjahres (&lt;b&gt;Epiphanias (Erscheinungsfest)&lt;/b&gt; usw.) angezeigt werden?">
-					<option value="0">Nicht anzeigen</option>
-					<option value="1">Vor dem Datum</option>
-					<option value="2">Nach dem Datum</option>
+				<field
+					name="zusatztext"
+					type="text"
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_ZUSATZTEXT_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_ZUSATZTEXT_DESC"
+					default="Tageslosung von"
+					showon="zusatztext_on:1,2"
+				/>
+				<field
+					name="sonntag_on"
+					type="radio"
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_SONNTAG_ON_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_SONNTAG_ON_DESC"
+					class="btn-group"
+					default="2"
+					>
+					<option value="0">MOD_HERRNHUTER_LOSUNGEN_FIELDS_SONNTAG_ON_OPTION_0</option>
+					<option value="1">MOD_HERRNHUTER_LOSUNGEN_FIELDS_SONNTAG_ON_OPTION_1</option>
+					<option value="2">MOD_HERRNHUTER_LOSUNGEN_FIELDS_SONNTAG_ON_OPTION_2</option>
 				</field>
 				<field name="@Losungstext" type="spacer" default=""
 					label="&lt;b&gt;&lt;i&gt;| Losungstext |&lt;/i&gt;&lt;/b&gt;" description=""></field>
