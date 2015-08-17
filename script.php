@@ -31,7 +31,7 @@ class Mod_herrnhuter_losungenInstallerScript
 
 		if (!$jversion->isCompatible($min_version))
 		{
-			JFactory::getApplication()->enqueueMessage(JText::sprintf('MOD_HERRNHUTER_VERSION_UNSUPPORTED', $min_version), 'error');
+			JFactory::getApplication()->enqueueMessage(JText::sprintf('MOD_HERRNHUTER_LOSUNGEN_VERSION_UNSUPPORTED', $min_version), 'error');
 
 			return false;
 		}
