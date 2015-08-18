@@ -1,17 +1,10 @@
 <?php
 /**
-* Herrnhuter Losungen XML J3.x
-* @version    : 3.x_131128
-* @package    : Joomla
-* @license    : GNU General Public License version 2 or later; see LICENSE.txt
-* @copyright  : Copyright (C) 2013 Dietmar Isenbart. All rights reserved.
-* @website    : http://di-side.de
-*
-* @Description: Anzeige der Herrnhuter Tageslosung aus den Daten der 'Losungen Free xxxx.xml' (xxxx=aktuelles Jahr),
-*               welches sich im Joomlaroot oder einem Verzeichnis darin, befinden muss.
-*               Die 'Losungen Free xxxx.xml' gibt es kostenlos bei http://www.losungen.de/download/download.php
-*               Anleitung/Infos/Updates zum Modul unter: http://di-side.de/
-**/
+ * @package         HerrnhuterLosungen
+ * @author          Thomas Hunziker <admin@sermonspeaker.net>
+ * @copyright   (C) 2015 - Thomas Hunziker
+ * @license         http://www.gnu.org/licenses/gpl.html
+ **/
 
 defined('_JEXEC') or die;
 
