@@ -12,8 +12,9 @@
 	<scriptfile>script.php</scriptfile>
 	<files>
 		<filename module="mod_herrnhuter_losungen">mod_herrnhuter_losungen.php</filename>
-		<filename>mod_herrnhuter_losungen.html</filename>
+		<filename>helper.php</filename>
 		<folder>language</folder>
+		<folder>tmpl</folder>
 	</files>
 	<config>
 		<fields name="params">
@@ -22,18 +23,7 @@
 				addfieldpath="modules/mod_herrnhuter_losungen/fields"
 				>
 				<field
-					name="los_cache_file_del"
-					type="radio"
-					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LOS_CACHE_FILE_DEL_LABEL"
-					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LOS_CACHE_FILE_DEL_DESC"
-					class="btn-group btn-group-yesno"
-					default="0"
-					>
-					<option value="1">JYES</option>
-					<option value="0">JNO</option>
-				</field>
-				<field
-					name="losungspfad"
+					name="path"
 					type="text"
 					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LOSUNGSPFAD_LABEL"
 					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LOSUNGSPFAD_DESC"
@@ -124,8 +114,6 @@
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
-				<field name="@Lehrtext" type="spacer" default=""
-					label="&lt;b&gt;&lt;i&gt;| Lehrtext |&lt;/i&gt;&lt;/b&gt;" description=""></field>
 				<field
 					name="lehr_txt_on"
 					type="radio"
@@ -205,17 +193,6 @@
 					class="validate-numeric input-mini"
 					default="600"
 				/>
-				<field
-					name="infolink_pos"
-					type="radio"
-					label="Position des Infolinks"
-					description="Wo soll der Link Info Herrnhuter Losungen erscheinen?"
-					class="btn-group"
-					default="0"
-					>
-					<option value="0">Vor den externen Links</option>
-					<option value="1">Nach den externen Links</option>
-				</field>
 				<field
 					name="links_on"
 					type="radio"
@@ -344,12 +321,34 @@
 					default="9"
 					showon="pfeil_on:1"
 				/>
-				<field name="pfeil_hspace" type="text" default="2" size="2" label="Grafik horizontaler Abstand"
-					description="linker und rechter Freiraum"></field>
-				<field name="pfeil_vspace" type="text" default="2" size="2" label="Grafik vertikaler Abstand"
-					description="oberer und unterer Freiraum"></field>
-				<field name="pfeil_align" type="list" default="absmiddle" label="Grafik Ausrichtung"
-					description="Grafikausrichtung bzw. Textumfluss. Am sinnvollsten dürfte wohl  middle oder absmiddle sein.">
+				<field
+					name="pfeil_hspace"
+					type="text"
+					label="Grafik horizontaler Abstand"
+					description="linker und rechter Freiraum"
+					filter="integer"
+					class="validate-numeric input-mini"
+					default="2"
+					showon="pfeil_on:1"
+				/>
+				<field
+					name="pfeil_vspace"
+					type="text"
+					label="Grafik vertikaler Abstand"
+					description="oberer und unterer Freiraum"
+					filter="integer"
+					class="validate-numeric input-mini"
+					default="2"
+					showon="pfeil_on:1"
+				/>
+				<field
+					name="pfeil_align"
+					type="list"
+					label="Grafik Ausrichtung"
+					description="Grafikausrichtung bzw. Textumfluss. Am sinnvollsten dürfte wohl  middle oder absmiddle sein."
+					default="absmiddle"
+					showon="pfeil_on:1"
+					>
 					<option value="standard">standard</option>
 					<option value="top">top</option>
 					<option value="middle">middle</option>
@@ -361,65 +360,66 @@
 					<option value="baseline">baseline</option>
 					<option value="absbottom">absbottom</option>
 				</field>
-				<field name="@StyledL" type="spacer" default=""
-					label="&lt;b&gt;&lt;i&gt;| Style des Losungsmodul |&lt;/i&gt;&lt;/b&gt;" description=""></field>
-				<field name="css_use" type="radio" default="0"
-					label="&lt;b&gt;Experteneinstellung&lt;/b&gt;&lt;br /&gt;Nachfolgende CSS-Daten einbinden (W3C)"
-					description="Sollen die nachfolgenden CSS-Daten für die Darstellung des Modulinhalts im Head-, im Body- oder gar nicht eingebunden werden?&lt;br /&gt;&lt;br /&gt;W3C Web Standard ist &lt;b&gt;Im Head (W3C)&lt;/b&gt;; dabei wird der Eintrag vom Modul im Head erledigt. Bei &lt;b&gt;Nicht einbinden&lt;/b&gt; muss anschließend oben &lt;b&gt;Cache löschen&lt;/b&gt; aktivieren und mit &lt;b&gt;Speichern&lt;/b&gt; die Moduleinstellungen verlassen werden.&lt;br /&gt;&lt;br /&gt;Nun die Homepage im Browser aufrufen; unter der Losungausgabe muß nun stehen: &lt;b&gt;Parameter aktualisiert&lt;/b&gt;.&lt;br /&gt;&lt;br /&gt;Danach im Backend wieder die Moduleinstellungen aufrufen und die CSS-Daten, deren Klassen nun mit der Modul-ID versehen sind, kopieren und in die template.css einfügen.">
+				<field
+					name="css_use"
+					type="radio"
+					label="Nachfolgende CSS-Daten einbinden (W3C)"
+					description="Sollen die nachfolgenden CSS-Daten für die Darstellung des Modulinhalts im Head-, im Body- oder gar nicht eingebunden werden?&lt;br /&gt;&lt;br /&gt;W3C Web Standard ist &lt;b&gt;Im Head (W3C)&lt;/b&gt;; dabei wird der Eintrag vom Modul im Head erledigt. Bei &lt;b&gt;Nicht einbinden&lt;/b&gt; muss anschließend oben &lt;b&gt;Cache löschen&lt;/b&gt; aktivieren und mit &lt;b&gt;Speichern&lt;/b&gt; die Moduleinstellungen verlassen werden.&lt;br /&gt;&lt;br /&gt;Nun die Homepage im Browser aufrufen; unter der Losungausgabe muß nun stehen: &lt;b&gt;Parameter aktualisiert&lt;/b&gt;.&lt;br /&gt;&lt;br /&gt;Danach im Backend wieder die Moduleinstellungen aufrufen und die CSS-Daten, deren Klassen nun mit der Modul-ID versehen sind, kopieren und in die template.css einfügen."
+					class="btn-group"
+					default="0"
+					>
 					<option value="0">Im Head (W3C)</option>
 					<option value="1">Im Body (Modulposition)</option>
 					<option value="2">Nicht einbinden</option>
 				</field>
-				<field name="losung_css" type="textarea" cols="60" rows="25"
-					default="/*Style innerer Modulrahmen*/&lt;br /&gt; .los_content {&lt;br /&gt; font-size: 10px;&lt;br /&gt; font-family: tahoma, Verdana, Arial, Helvetica, sans-serif;&lt;br /&gt; margin: 0 0px;&lt;br /&gt; width: auto&lt;br /&gt; }&lt;br /&gt; &lt;br /&gt; /*Style Wochentag/Datum*/&lt;br /&gt; .los_content .los_datum {&lt;br /&gt; font-size: 11px;&lt;br /&gt; font-style: italic;&lt;br /&gt; text-align: center;&lt;br /&gt; width: auto&lt;br /&gt; }&lt;br /&gt; &lt;br /&gt; /*Style Sonntagstext*/&lt;br /&gt; .los_content .los_sonntagtxt {&lt;br /&gt; font-size: 10px;&lt;br /&gt; font-style: italic;&lt;br /&gt; margin-top: 5px&lt;br /&gt; }&lt;br /&gt; &lt;br /&gt; /*Style Losungstext*/&lt;br /&gt; .los_content .los_losungtxt {&lt;br /&gt; font-size: 11px;&lt;br /&gt; margin-top: 5px&lt;br /&gt; }&lt;br /&gt; .los_content .los_losungtxt_link {&lt;br /&gt; font-size: 10px;&lt;br /&gt; text-align: right&lt;br /&gt; }&lt;br /&gt; .los_content a.los_losungtxt_link:link, .los_content a.los_losungtxt_link:visited {&lt;br /&gt; /*color: #2a370d;*/&lt;br /&gt; font-size: 10px;&lt;br /&gt; font-weight: normal;&lt;br /&gt; text-decoration: none;&lt;br /&gt; cursor: pointer&lt;br /&gt; }&lt;br /&gt; .los_content a.los_losungtxt_link:hover {&lt;br /&gt; /*color: #477711;*/&lt;br /&gt; font-weight: normal;&lt;br /&gt; text-decoration: underline&lt;br /&gt; }&lt;br /&gt; &lt;br /&gt; /*Style Lehrtext*/&lt;br /&gt; .los_content .los_lehrtxt {&lt;br /&gt; font-size: 11px;&lt;br /&gt; margin-top: 5px&lt;br /&gt; }&lt;br /&gt; .los_content .los_lehrtxt_link {&lt;br /&gt; font-size: 10px;&lt;br /&gt; text-align: right&lt;br /&gt; }&lt;br /&gt; .los_content a.los_lehrtxt_link:link, .los_content a.los_lehrtxt_link:visited {&lt;br /&gt; /*color: #2a370d;*/&lt;br /&gt; font-size: 10px;&lt;br /&gt; font-weight: normal;&lt;br /&gt; text-decoration: none;&lt;br /&gt; cursor: pointer&lt;br /&gt; }&lt;br /&gt; .los_content a.los_lehrtxt_link:hover {&lt;br /&gt; /*color: #477711;*/&lt;br /&gt; font-weight: normal;&lt;br /&gt; text-decoration: underline&lt;br /&gt; }&lt;br /&gt; &lt;br /&gt; /*Style Info Link*/&lt;br /&gt; .los_content .los_info_link {&lt;br /&gt; font-size: 10px;&lt;br /&gt; }&lt;br /&gt; .los_content a.los_info_link:link, .los_content a.los_info_link:visited {&lt;br /&gt; /*color: #2a370d;*/&lt;br /&gt; font-weight: normal;&lt;br /&gt; text-decoration: none;&lt;br /&gt; cursor: pointer&lt;br /&gt; }&lt;br /&gt; .los_content a.los_info_link:hover {&lt;br /&gt; /*color: #477711;*/&lt;br /&gt; font-weight: normal;&lt;br /&gt; text-decoration: underline&lt;br /&gt; }&lt;br /&gt; &lt;br /&gt; /*Style externe Links*/&lt;br /&gt; .los_content .los_ext_links {&lt;br /&gt; font-size: 10px;&lt;br /&gt; }&lt;br /&gt; .los_content a.los_ext_links:link, .los_content a.los_ext_links:visited {&lt;br /&gt; /*color: #2a370d;*/&lt;br /&gt; font-weight: normal;&lt;br /&gt; text-decoration: none;&lt;br /&gt; cursor: pointer&lt;br /&gt; }&lt;br /&gt; .los_content a.los_ext_links:hover {&lt;br /&gt; /*color: #477711;*/&lt;br /&gt; font-weight: normal;&lt;br /&gt; text-decoration: underline&lt;br /&gt; }"
+				<field
+					name="losung_css"
+					type="textarea"
 					label="Style Losungsmodul"
-					description="CSS Style für den Losungtext und die externen Links.&lt;br /&gt;&lt;br /&gt;Um den Defaultstyle wiederherzustellen, den Inhalt des Style-Eingabefeldes löschen und anschließend auf Anwenden klicken.&lt;br /&gt;&lt;br /&gt;Um im Layout der Homepage Platz zu sparen, können die Kommentare und Leerzeilen ruhig gelöscht werden. Sie dienen hier nur zum Verständnis.">
+					description="CSS Style für den Losungtext und die externen Links.&lt;br /&gt;&lt;br /&gt;Um den Defaultstyle wiederherzustellen, den Inhalt des Style-Eingabefeldes löschen und anschließend auf Anwenden klicken.&lt;br /&gt;&lt;br /&gt;Um im Layout der Homepage Platz zu sparen, können die Kommentare und Leerzeilen ruhig gelöscht werden. Sie dienen hier nur zum Verständnis."
+					rows="25"
+					class="input-xxlarge"
+					default="/*Style innerer Modulrahmen*/&lt;br /&gt; .los_content {&lt;br /&gt; font-size: 10px;&lt;br /&gt; font-family: tahoma, Verdana, Arial, Helvetica, sans-serif;&lt;br /&gt; margin: 0 0px;&lt;br /&gt; width: auto&lt;br /&gt; }&lt;br /&gt; &lt;br /&gt; /*Style Wochentag/Datum*/&lt;br /&gt; .los_content .los_datum {&lt;br /&gt; font-size: 11px;&lt;br /&gt; font-style: italic;&lt;br /&gt; text-align: center;&lt;br /&gt; width: auto&lt;br /&gt; }&lt;br /&gt; &lt;br /&gt; /*Style Sonntagstext*/&lt;br /&gt; .los_content .los_sonntagtxt {&lt;br /&gt; font-size: 10px;&lt;br /&gt; font-style: italic;&lt;br /&gt; margin-top: 5px&lt;br /&gt; }&lt;br /&gt; &lt;br /&gt; /*Style Losungstext*/&lt;br /&gt; .los_content .los_losungtxt {&lt;br /&gt; font-size: 11px;&lt;br /&gt; margin-top: 5px&lt;br /&gt; }&lt;br /&gt; .los_content .los_losungtxt_link {&lt;br /&gt; font-size: 10px;&lt;br /&gt; text-align: right&lt;br /&gt; }&lt;br /&gt; .los_content a.los_losungtxt_link:link, .los_content a.los_losungtxt_link:visited {&lt;br /&gt; /*color: #2a370d;*/&lt;br /&gt; font-size: 10px;&lt;br /&gt; font-weight: normal;&lt;br /&gt; text-decoration: none;&lt;br /&gt; cursor: pointer&lt;br /&gt; }&lt;br /&gt; .los_content a.los_losungtxt_link:hover {&lt;br /&gt; /*color: #477711;*/&lt;br /&gt; font-weight: normal;&lt;br /&gt; text-decoration: underline&lt;br /&gt; }&lt;br /&gt; &lt;br /&gt; /*Style Lehrtext*/&lt;br /&gt; .los_content .los_lehrtxt {&lt;br /&gt; font-size: 11px;&lt;br /&gt; margin-top: 5px&lt;br /&gt; }&lt;br /&gt; .los_content .los_lehrtxt_link {&lt;br /&gt; font-size: 10px;&lt;br /&gt; text-align: right&lt;br /&gt; }&lt;br /&gt; .los_content a.los_lehrtxt_link:link, .los_content a.los_lehrtxt_link:visited {&lt;br /&gt; /*color: #2a370d;*/&lt;br /&gt; font-size: 10px;&lt;br /&gt; font-weight: normal;&lt;br /&gt; text-decoration: none;&lt;br /&gt; cursor: pointer&lt;br /&gt; }&lt;br /&gt; .los_content a.los_lehrtxt_link:hover {&lt;br /&gt; /*color: #477711;*/&lt;br /&gt; font-weight: normal;&lt;br /&gt; text-decoration: underline&lt;br /&gt; }&lt;br /&gt; &lt;br /&gt; /*Style Info Link*/&lt;br /&gt; .los_content .los_info_link {&lt;br /&gt; font-size: 10px;&lt;br /&gt; }&lt;br /&gt; .los_content a.los_info_link:link, .los_content a.los_info_link:visited {&lt;br /&gt; /*color: #2a370d;*/&lt;br /&gt; font-weight: normal;&lt;br /&gt; text-decoration: none;&lt;br /&gt; cursor: pointer&lt;br /&gt; }&lt;br /&gt; .los_content a.los_info_link:hover {&lt;br /&gt; /*color: #477711;*/&lt;br /&gt; font-weight: normal;&lt;br /&gt; text-decoration: underline&lt;br /&gt; }&lt;br /&gt; &lt;br /&gt; /*Style externe Links*/&lt;br /&gt; .los_content .los_ext_links {&lt;br /&gt; font-size: 10px;&lt;br /&gt; }&lt;br /&gt; .los_content a.los_ext_links:link, .los_content a.los_ext_links:visited {&lt;br /&gt; /*color: #2a370d;*/&lt;br /&gt; font-weight: normal;&lt;br /&gt; text-decoration: none;&lt;br /&gt; cursor: pointer&lt;br /&gt; }&lt;br /&gt; .los_content a.los_ext_links:hover {&lt;br /&gt; /*color: #477711;*/&lt;br /&gt; font-weight: normal;&lt;br /&gt; text-decoration: underline&lt;br /&gt; }"
+					>
 				</field>
 			</fieldset>
-			<fieldset name="Info-File" label="Info-File Copyright" description="">
-				<field name="@Hinweis" type="spacer" default=""
-					label="&lt;b&gt;&lt;i&gt;&lt;u&gt;* Hinweis &lt;/u&gt;&lt;/i&gt;&lt;/b&gt;"
-					description="Einstellungsbereich für das Info-File mit den Copyright-Informationen, das im Frontend bei Klick auf den Link:&lt;br /&gt;&lt;br /&gt;&lt;b&gt;Info Herrnhuter Losungen&lt;/b&gt;&lt;br /&gt;(unterhalb des Losungs-Moduls)&lt;br /&gt;&lt;br /&gt;angezeigt wird.&lt;br /&gt;&lt;br /&gt;Die nachfolgenden Einstellungen haben keinen Einfluss auf die Frontenddarstellung des Losungsmoduls.&lt;br /&gt;&lt;br /&gt;&lt;b&gt;Wichtig bei Nutzung mehrerer Losungsmodule:&lt;/b&gt;&lt;br /&gt;Damit die, im Info-File-Bereich, gemachten Größenänderungen (PopUp) von allen Losungsmodulen übernommen werden, ist es notwendig jede Frontend-Seite die ein Losungsmodul enthält, im Browser zu aktualisieren. Erst danach ist der Link des betroffenen Moduls, mit den korrekten Größenangaben vorhanden."></field>
+			<fieldset name="advanced">
 				<field
-					name="copyright_file_neu"
-					type="radio"
-					label="Info-File erneuern"
-					description="Soll das Info-File neu erstellt werden?&lt;br /&gt;&lt;br /&gt;Hier MUSS &lt;b&gt;Ja&lt;/b&gt; aktiviert werden, wenn die nachfolgenden Einstellungen, unterhalb von &lt;b&gt;Info-File erneuern&lt;/b&gt; verändert werden!!!&lt;br /&gt;&lt;br /&gt;Außerdem muss &lt;b&gt;Ja&lt;/b&gt; aktiviert werden, falls das Sitetemplate gewechselt wird und gleichzeitig &lt;b&gt;template.css.css nutzen&lt;/b&gt; auf &lt;b&gt;Ja&lt;/b&gt; steht, weil nur dann das aktuelle Joomla-Template-CSS eingebunden wird."
-					class="btn-group btn-group-yesno"
-					default="0"
-					>
-					<option value="1">JYES</option>
-					<option value="0">JNO</option>
-				</field>
-				<field name="modal_rel_info_on" type="radio" default="0" label="Info-Anzeigeart"
-					description="Soll das Infofile in der Lightbox angezeigt werden, oder in einem PopUp-Fenster?">
-					<option value="0">In PopUp-Fenster</option>
-					<option value="1">In der Lightbox</option>
-				</field>
-				<field name="copyright_width" type="text" default="600" size="6" label="Breite Infofenster"
-					description="Die Breite für das PopUp-Fenster: Info Herrnhuter Losungen&lt;br /&gt;&lt;br /&gt;Nur einen Zahlenwert verwenden, ohne (px) oder (%)&lt;br /&gt;&lt;br /&gt;Default = 600.&lt;br /&gt;&lt;br /&gt;&lt;b&gt;Wichtig bei Einsatz mehrerer Losungsmodule:&lt;/b&gt;&lt;br /&gt;Nach Größenänderungen hier im &lt;b&gt;Site Module: Edit&lt;/b&gt;, bitte &lt;b&gt;Info-File erneuern&lt;/b&gt; auf &lt;b&gt;Ja&lt;/b&gt; stellen, dann den Edit-Bereich mit &lt;b&gt;Speichern&lt;/b&gt; verlassen. Anschließend das Frontend-Browserfenster aktualisieren und diesen Edit-Bereich des selben Moduls erneut aufrufen und mit aktiviertem &lt;b&gt;Cache löschen&lt;/b&gt; erneut abspeichern und das Frontend-Browserfenster erneut aktualisieren.&lt;br /&gt;&lt;br /&gt; Erst dann sind in allen Links (Info Herrnhuter Losungen) der benutzen Losungsmodule, die gleichen Größenangaben für das PopUp-Fenster eingetragen."></field>
-				<field name="copyright_height" type="text" default="365" size="6" label="Höhe Infofenster"
-					description="Die Höhe für das PopUp-Fenster: Info Herrnhuter Losungen&lt;br /&gt;&lt;br /&gt;Nur einen Zahlenwert verwenden, ohne (px) oder (%)&lt;br /&gt;&lt;br /&gt;Default = 365.&lt;br /&gt;&lt;br /&gt;&lt;b&gt;Wichtig bei Einsatz mehrerer Losungsmodule:&lt;/b&gt;&lt;br /&gt;Nach Größenänderungen hier im &lt;b&gt;Site Module: Edit&lt;/b&gt;, bitte &lt;b&gt;Info-File erneuern&lt;/b&gt; auf &lt;b&gt;Ja&lt;/b&gt; stellen, dann den Edit-Bereich mit &lt;b&gt;Speichern&lt;/b&gt; verlassen. Anschließend das Frontend-Browserfenster aktualisieren und diesen Edit-Bereich des selben Moduls erneut aufrufen und mit aktiviertem &lt;b&gt;Cache löschen&lt;/b&gt; erneut abspeichern und das Frontend-Browserfenster erneut aktualisieren.&lt;br /&gt;&lt;br /&gt; Erst dann sind in allen Links (Info Herrnhuter Losungen) der benutzen Losungsmodule, die gleichen Größenangaben für das PopUp-Fenster eingetragen."></field>
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					description="JFIELD_ALT_MODULE_LAYOUT_DESC"
+				/>
 				<field
-					name="templatecss_on"
-					type="radio"
-					label="template.css.css nutzen"
-					description="Soll das CSS-File (template.css.css) des aktuellen Site-Templates in die Info-Datei mit eingebunden werden?&lt;br /&gt;&lt;br /&gt;Macht natürlich nur Sinn, wenn im unteren Eingabefeld &lt;b&gt;Style Infofile&lt;/b&gt;, nur die .cr_*-Klassen eingetragen sind (doppelte Klassennamen)."
-					class="btn-group btn-group-yesno"
+					name="moduleclass_sfx"
+					type="textarea"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC"
+					rows="3"
+				/>
+				<field
+					name="cache"
+					type="list"
+					label="COM_MODULES_FIELD_CACHING_LABEL"
+					description="COM_MODULES_FIELD_CACHING_DESC"
 					default="1"
 					>
-					<option value="1">JYES</option>
-					<option value="0">JNO</option>
+					<option value="1">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
 				</field>
-				<field name="copyright_css" type="textarea" cols="60" rows="25"
-					default="/*****************************************************&lt;br /&gt;* Hier können zusätzliche Klassen eingetragen werden *&lt;br /&gt;* z.B.: (a:link {}) oder wie unten (body)            *&lt;br /&gt;*****************************************************/&lt;br /&gt;body {&lt;br /&gt; font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular;&lt;br /&gt; background-color: #f8f8f8;&lt;br /&gt; margin: 0&lt;br /&gt; }&lt;br /&gt;&lt;br /&gt;/*****************************************************&lt;br /&gt;*!!!Die nachfolgenden KlassenNAMEN nicht verändern!!!*&lt;br /&gt;*****************************************************/&lt;br /&gt;.cr_inner {&lt;br /&gt; font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular;&lt;br /&gt; margin: 15px;&lt;br /&gt; width: auto;&lt;br /&gt; border: dotted 1px #E8E8E8&lt;br /&gt; }&lt;br /&gt;.cr_headline {&lt;br /&gt; color: #fff;&lt;br /&gt; font-size: 12pt;&lt;br /&gt; font-weight: bold;&lt;br /&gt; background-color: #E8E8E8;&lt;br /&gt; text-align: left;&lt;br /&gt; padding: 1px 1px 1px 3px;&lt;br /&gt; width: auto&lt;br /&gt; }&lt;br /&gt;.cr_bodyline {&lt;br /&gt; font-size: 11pt;&lt;br /&gt; font-weight: bold;&lt;br /&gt; background-color: #F5F5F5;&lt;br /&gt; text-align: left;&lt;br /&gt; padding: 1px 1px 1px 3px;&lt;br /&gt; width: auto&lt;br /&gt; }&lt;br /&gt;.cr_content {&lt;br /&gt; font-size: 10pt;&lt;br /&gt; text-align: justify;&lt;br /&gt; padding: 2px 2px 20px 3px;&lt;br /&gt; width: auto&lt;br /&gt; }"
-					label="Style Infofile"
-					description="CSS Style für das Info-File.&lt;br /&gt;&lt;br /&gt;&lt;b&gt;Wichtig:&lt;/b&gt;&lt;br /&gt;Die hier enthaltenen KlassenNAMEN (.cr_inner, .cr_headline, .cr_bodyline, .cr_content) nicht ändern, sonst wird das Layot zerstört. &lt;b&gt;Die Parameter können natürlich verändert werden.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;Es kann zusätzlich das CSS-File des aktuell verwendeten Joomla-Templates in das Info.File eingebunden werden.&lt;br /&gt;&lt;b&gt;template.css.css nutzen&lt;/b&gt; auf &lt;b&gt;Ja&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;Um den Defaultstyle wiederherzustellen, den Inhalt des Style-Eingabefeldes löschen und anschließend auf Anwenden klicken.&lt;br /&gt;&lt;br /&gt;Um im Layout der Homepage Platz zu sparen, können die Kommentare und Leerzeilen ruhig gelöscht werden. Sie dienen hier nur zum Verständnis.">
+				<field
+					name="cache_time"
+					type="text"
+					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+					description="COM_MODULES_FIELD_CACHE_TIME_DESC"
+					default="900"
+				/>
+				<field
+					name="cachemode"
+					type="hidden"
+					default="static">
+					<option value="static"></option>
 				</field>
-			</fieldset>
-			<fieldset name="System" label="System">
-				<field name="moduleclass_sfx" type="text" default="" size="50" label="Module Class Suffix"
-					description="CSS-Class-Erweiterung z.B.: -rand&lt;br /&gt;&lt;br /&gt;In der template.css sollten dann auch diese CSS-Einträge existieren:&lt;br /&gt;table.moduletable-rand&lt;br /&gt;table.moduletable-rand td&lt;br /&gt;table.module.table-rand th"></field>
 			</fieldset>
 		</fields>
 	</config>
