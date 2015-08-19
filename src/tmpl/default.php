@@ -11,14 +11,14 @@ defined('_JEXEC') or die;
 JHtml::_('bootstrap.popover', '.losung', array('trigger' => 'manual'));
 JHtml::_('bootstrap.tooltip');
 
-if ($params->get('use_css', 1))
+if ($params->get('load_css', 1))
 {
 	JHtml::_('stylesheet', 'mod_herrnhuter_losungen/losung.css', false, true, false);
 }
 
-if ($params->get('use_css', 1))
+if ($params->get('load_icomoon'))
 {
-	JHtml::_('stylesheet', 'mod_herrnhuter_losungen/losung.css', false, true, false);
+	JHtml::_('stylesheet', 'jui/icomoon.css', false, true, false);
 }
 
 ?>
