@@ -14,6 +14,7 @@
 		<filename module="mod_herrnhuter_losungen">mod_herrnhuter_losungen.php</filename>
 		<filename>helper.php</filename>
 		<folder>language</folder>
+		<folder>fields</folder>
 		<folder>tmpl</folder>
 	</files>
 	<config>
@@ -212,6 +213,9 @@
 					showon="show_links:1,2"
 					>
 					<option value="icon-star">MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_ICON_CLASS_OPTION_STAR</option>
+					<option value="icon-arrow-right-3">MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_ICON_CLASS_OPTION_ARROW</option>
+					<option value="icon-chevron-right">MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_ICON_CLASS_OPTION_CHEVRON</option>
+					<option value="icon-link">MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_ICON_CLASS_OPTION_LINK</option>
 				</field>
 				<field
 					name="link_mode"
@@ -277,87 +281,8 @@
 					filter="integer"
 					class="validate-numeric input-mini"
 					default="600"
-					showon="link_scripture:2"
-					/>
-				<field
-					name="pfeil_on"
-					type="radio"
-					label="Link-Grafik anzeigen"
-					description="Soll vor den Links eine Grafik angezeigt werden?"
-					class="btn-group btn-group-yesno"
-					default="1"
 					showon="show_links:1,2"
-					>
-					<option value="1">JYES</option>
-					<option value="0">JNO</option>
-				</field>
-				<field
-					name="pfeil_url"
-					type="text"
-					label="Link-Grafik URL"
-					description="Korrekter Pfad+Dateiname zur gewünschten Grafik (innerhalb des Joomlaroot), die den externen Links vorangestellt wird.&lt;br /&gt;&lt;br /&gt;&lt;b&gt;OHNE&lt;/b&gt; vorangestelltem Slash (/)&lt;br /&gt;&lt;br /&gt;Default ist:&lt;br /&gt;images/M_images/arrow.png"
-					default="media/system/images/arrow.png"
-					showon="pfeil_on:1"
 				/>
-				<field
-					name="pfeil_width"
-					type="text"
-					label="Grafik Breite"
-					description="X = original Bildbreite.&lt;br /&gt;Um die original Bildgröße darzustellen, muss in beiden Größenfeldern ein X stehen.&lt;br /&gt;&lt;br /&gt;Wenn eine Zahl für die Grafikhöhe angegeben ist, wird die Grafikbreite automatisch berechnet.&lt;br /&gt;&lt;br /&gt;Die Bildproportionen bleiben dann erhalten."
-					filter="integer"
-					class="validate-numeric input-mini"
-					default="9"
-					showon="pfeil_on:1"
-				/>
-				<field
-					name="pfeil_height"
-					type="text"
-					label="Grafik Höhe"
-					description="X = original Bildhöhe.&lt;br /&gt;Um die original Bildgröße darzustellen, muss in beiden Größenfeldern ein X stehen.&lt;br /&gt;&lt;br /&gt;Wenn eine Zahl für die Grafikbreite angegeben ist, wird die Grafikhöhe automatisch berechnet.&lt;br /&gt;&lt;br /&gt;Die Bildproportionen bleiben also erhalten."
-					filter="integer"
-					class="validate-numeric input-mini"
-					default="9"
-					showon="pfeil_on:1"
-				/>
-				<field
-					name="pfeil_hspace"
-					type="text"
-					label="Grafik horizontaler Abstand"
-					description="linker und rechter Freiraum"
-					filter="integer"
-					class="validate-numeric input-mini"
-					default="2"
-					showon="pfeil_on:1"
-				/>
-				<field
-					name="pfeil_vspace"
-					type="text"
-					label="Grafik vertikaler Abstand"
-					description="oberer und unterer Freiraum"
-					filter="integer"
-					class="validate-numeric input-mini"
-					default="2"
-					showon="pfeil_on:1"
-				/>
-				<field
-					name="pfeil_align"
-					type="list"
-					label="Grafik Ausrichtung"
-					description="Grafikausrichtung bzw. Textumfluss. Am sinnvollsten dürfte wohl  middle oder absmiddle sein."
-					default="absmiddle"
-					showon="pfeil_on:1"
-					>
-					<option value="standard">standard</option>
-					<option value="top">top</option>
-					<option value="middle">middle</option>
-					<option value="bottom">bottom</option>
-					<option value="left">left</option>
-					<option value="right">right</option>
-					<option value="texttop">texttop</option>
-					<option value="absmiddle">absmiddle</option>
-					<option value="baseline">baseline</option>
-					<option value="absbottom">absbottom</option>
-				</field>
 				<field
 					name="css_use"
 					type="radio"
@@ -415,7 +340,7 @@
 				<field
 					name="cachemode"
 					type="hidden"
-					default="static">
+					default="id">
 					<option value="static"></option>
 				</field>
 			</fieldset>

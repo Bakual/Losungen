@@ -39,13 +39,13 @@ Jhtml::_('bootstrap.tooltip');
 				<?php if ($params->get('link1_url') and $params->get('link1_title')) : ?>
 					<li><?php echo ModHerrnhuterlosungenHelper::linkExtern(1, $params, $module->id); ?></li>
 				<?php endif; ?>
-				<?php if ($params->get('link2_url') and $params->get('link2_title')) : ?>
+				<?php if (($params->get('show_links') == 2) and $params->get('link2_url') and $params->get('link2_title')) : ?>
 					<li><?php echo ModHerrnhuterlosungenHelper::linkExtern(2, $params, $module->id); ?></li>
 				<?php endif; ?>
 			</ul>
 		</div>
 	<?php endif; ?>
-	<div class="small center">
+	<div class="small">
 		<a href="#" class="losung" onclick="jQuery(this).popover('toggle');return false;" data-placement="top" data-title="<?php echo JText::_('MOD_HERRNHUTER_LOSUNGEN_INFO'); ?>" data-content="<?php echo JText::_('MOD_HERRNHUTER_LOSUNGEN_INFO_POPOVER'); ?>">
 			<?php echo JText::_('MOD_HERRNHUTER_LOSUNGEN_INFO'); ?>
 		</a>

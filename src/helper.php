@@ -112,9 +112,9 @@ abstract class ModHerrnhuterlosungenHelper
 		$text = $params->get('link' . $index . '_title');
 		$html = '';
 
-		if ($params->get('list_li_class'))
+		if ($params->get('link_icon_class'))
 		{
-			$return = '<span class="' . $params->get('link_icon_class') . '"></span> ';
+			$html = '<span class="' . $params->get('link_icon_class') . '"> </span> ';
 		}
 
 		if ($params->get('link_mode', 1) == 1)
@@ -140,87 +140,6 @@ abstract class ModHerrnhuterlosungenHelper
 	{
 		{
 			{
-				// Grafik anzeigen
-				if ($pfeil_on == 1)
-				{
-
-
-					// extene Links anzeigen?
-					// 1. Link anzeigen
-					if ($links_on >= 1)
-					{
-						if ($modal_rel_link_on == "1")
-						{
-							$ausgabe .= "<div class=\"los_" . $modid . "_ext_links\"><img src=\"" . JUri::root() . $pfeil_url . "\" border=\"0\" hspace=\"$pfeil_hspace\" vspace=\"$pfeil_vspace\" $pfeil_width $pfeil_height $pfeil_align /><a title=\"" . $link1_titel . "\" class=\"modal los_" . $modid . "_ext_links\" href=\"" . $link1_url . "\" target=\"_blank\"$modal_rel_link>" . $link1_titel . "</a>\n";
-						}
-						else
-						{
-							$ausgabe .= "<div class=\"los_" . $modid . "_ext_links\"><img src=\"" . JUri::root() . $pfeil_url . "\" border=\"0\" hspace=\"$pfeil_hspace\" vspace=\"$pfeil_vspace\" $pfeil_width $pfeil_height $pfeil_align /><a title=\"" . $link1_titel . "\" class=\"los_" . $modid . "_ext_links\" href=\"" . $link1_url . "\" target=\"_blank\"$modal_rel_link>" . $link1_titel . "</a>\n";
-						}
-
-						// 2. Link anzeigen
-						if ($links_on == 2)
-						{
-							// untereinander
-							if ($links_line == 1)
-							{
-								$ausgabe .= "<br>\n";
-							}
-							// nebeneinander
-							if ($modal_rel_link_on >= 1)
-							{
-								$ausgabe .= "<img src=\"" . JUri::root() . $pfeil_url . "\" border=\"0\" hspace=\"$pfeil_hspace\" vspace=\"$pfeil_vspace\" $pfeil_width $pfeil_height $pfeil_align /><a title=\"" . $link2_titel . "\" class=\"modal los_" . $modid . "_ext_links\" href=\"" . $link2_url . "\" target=\"_blank\"$modal_rel_link>" . $link2_titel . "</a>\n";
-							}
-							else
-							{
-								$ausgabe .= "<img src=\"" . JUri::root() . $pfeil_url . "\" border=\"0\" hspace=\"$pfeil_hspace\" vspace=\"$pfeil_vspace\" $pfeil_width $pfeil_height $pfeil_align /><a title=\"" . $link2_titel . "\" class=\"los_" . $modid . "_ext_links\" href=\"" . $link2_url . "\" target=\"_blank\"$modal_rel_link>" . $link2_titel . "</a>\n";
-							}
-						}
-						$ausgabe .= "</div>\n";
-					}
-				}
-
-				//Grafik nicht anzeigen
-				if ($pfeil_on == 0)
-				{
-
-					// extene Links anzeigen?
-					// 1. Link anzeigen
-					if ($links_on >= 1)
-					{
-						if ($modal_rel_link_on >= 1)
-						{
-							$ausgabe .= "<div class=\"los_" . $modid . "_ext_links\"" . $style_ext . "><a title=\"" . $link1_titel . "\" class=\"modal los_" . $modid . "_ext_links\" href=\"" . $link1_url . "\" target=\"_blank\"$modal_rel_link>" . $link1_titel . "</a>\n";
-						}
-						else
-						{
-							$ausgabe .= "<div class=\"los_" . $modid . "_ext_links\"" . $style_ext . "><a title=\"" . $link1_titel . "\" class=\"los_" . $modid . "_ext_links\" href=\"" . $link1_url . "\" target=\"_blank\"$modal_rel_link>" . $link1_titel . "</a>\n";
-						}
-						// 2. Link anzeigen
-						if ($links_on == 2)
-						{
-							// untereinander
-							if ($links_line == 1)
-							{
-								$ausgabe .= "<br>\n";
-								// nebeneinander
-							}
-							else
-							{
-								$ausgabe .= "&nbsp;&nbsp;&nbsp;";
-							}
-							if ($modal_rel_link_on >= 1)
-							{
-								$ausgabe .= "<a title=\"" . $link2_titel . "\" class=\"modal los_" . $modid . "_ext_links\" href=\"" . $link2_url . "\" target=\"_blank\"$modal_rel_link>" . $link2_titel . "</a>\n";
-							}
-							else
-							{
-								$ausgabe .= "<a title=\"" . $link2_titel . "\" class=\"los_" . $modid . "_ext_links\" href=\"" . $link2_url . "\" target=\"_blank\"$modal_rel_link>" . $link2_titel . "</a>\n";
-							}
-						}
-						$ausgabe .= "</div>\n";
-					}
-				}
 				// CSS-Head
 				if ($css_use == "0")
 				{
