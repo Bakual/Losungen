@@ -17,6 +17,9 @@
 		<folder>fields</folder>
 		<folder>tmpl</folder>
 	</files>
+	<media destination="mod_herrnhuter_losungen" folder="media">
+		<folder>css</folder>
+	</media>
 	<config>
 		<fields name="params">
 			<fieldset
@@ -29,17 +32,6 @@
 					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_PATH_LABEL"
 					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_PATH_DESC"
 				/>
-				<field
-					name="char_set"
-					type="radio"
-					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_CHAR_SET_LABEL"
-					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_CHAR_SET_DESC"
-					class="btn-group"
-					default="UTF-8"
-					>
-					<option value="UTF-8">UTF-8</option>
-					<option value="ISO-8859-1">ISO-8859-1</option>
-				</field>
 				<field
 					name="show_date"
 					type="radio"
@@ -203,7 +195,11 @@
 					>
 					<option value="unstyled">MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_UL_CLASS_OPTION_UNSTYLED</option>
 					<option value="inline">MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_UL_CLASS_OPTION_INLINE</option>
+					<option value="nav">MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_UL_CLASS_OPTION_NAV</option>
 					<option value="nav nav-list">MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_UL_CLASS_OPTION_NAV_LIST</option>
+					<option value="nav nav-tabs nav-stacked">MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_UL_CLASS_OPTION_NAV_TABS_STACKED</option>
+					<option value="nav nav-pills">MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_UL_CLASS_OPTION_NAV_PILLS</option>
+					<option value="nav nav-pills nav-stacked">MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_UL_CLASS_OPTION_NAV_PILLS_STACKED</option>
 				</field>
 				<field
 					name="link_icon_class"
@@ -284,26 +280,15 @@
 					showon="show_links:1,2"
 				/>
 				<field
-					name="css_use"
+					name="use_css"
 					type="radio"
-					label="Nachfolgende CSS-Daten einbinden (W3C)"
-					description="Sollen die nachfolgenden CSS-Daten für die Darstellung des Modulinhalts im Head-, im Body- oder gar nicht eingebunden werden?&lt;br /&gt;&lt;br /&gt;W3C Web Standard ist &lt;b&gt;Im Head (W3C)&lt;/b&gt;; dabei wird der Eintrag vom Modul im Head erledigt. Bei &lt;b&gt;Nicht einbinden&lt;/b&gt; muss anschließend oben &lt;b&gt;Cache löschen&lt;/b&gt; aktivieren und mit &lt;b&gt;Speichern&lt;/b&gt; die Moduleinstellungen verlassen werden.&lt;br /&gt;&lt;br /&gt;Nun die Homepage im Browser aufrufen; unter der Losungausgabe muß nun stehen: &lt;b&gt;Parameter aktualisiert&lt;/b&gt;.&lt;br /&gt;&lt;br /&gt;Danach im Backend wieder die Moduleinstellungen aufrufen und die CSS-Daten, deren Klassen nun mit der Modul-ID versehen sind, kopieren und in die template.css einfügen."
-					class="btn-group"
-					default="0"
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_USE_CSS_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_USE_CSS_DESC"
+					class="btn-group btn-group-yesno"
+					default="1"
 					>
-					<option value="0">Im Head (W3C)</option>
-					<option value="1">Im Body (Modulposition)</option>
-					<option value="2">Nicht einbinden</option>
-				</field>
-				<field
-					name="losung_css"
-					type="textarea"
-					label="Style Losungsmodul"
-					description="CSS Style für den Losungtext und die externen Links.&lt;br /&gt;&lt;br /&gt;Um den Defaultstyle wiederherzustellen, den Inhalt des Style-Eingabefeldes löschen und anschließend auf Anwenden klicken.&lt;br /&gt;&lt;br /&gt;Um im Layout der Homepage Platz zu sparen, können die Kommentare und Leerzeilen ruhig gelöscht werden. Sie dienen hier nur zum Verständnis."
-					rows="25"
-					class="input-xxlarge"
-					default="/*Style innerer Modulrahmen*/&lt;br /&gt; .los_content {&lt;br /&gt; font-size: 10px;&lt;br /&gt; font-family: tahoma, Verdana, Arial, Helvetica, sans-serif;&lt;br /&gt; margin: 0 0px;&lt;br /&gt; width: auto&lt;br /&gt; }&lt;br /&gt; &lt;br /&gt; /*Style Wochentag/Datum*/&lt;br /&gt; .los_content .los_datum {&lt;br /&gt; font-size: 11px;&lt;br /&gt; font-style: italic;&lt;br /&gt; text-align: center;&lt;br /&gt; width: auto&lt;br /&gt; }&lt;br /&gt; &lt;br /&gt; /*Style Sonntagstext*/&lt;br /&gt; .los_content .los_sonntagtxt {&lt;br /&gt; font-size: 10px;&lt;br /&gt; font-style: italic;&lt;br /&gt; margin-top: 5px&lt;br /&gt; }&lt;br /&gt; &lt;br /&gt; /*Style Losungstext*/&lt;br /&gt; .los_content .los_losungtxt {&lt;br /&gt; font-size: 11px;&lt;br /&gt; margin-top: 5px&lt;br /&gt; }&lt;br /&gt; .los_content .los_losungtxt_link {&lt;br /&gt; font-size: 10px;&lt;br /&gt; text-align: right&lt;br /&gt; }&lt;br /&gt; .los_content a.los_losungtxt_link:link, .los_content a.los_losungtxt_link:visited {&lt;br /&gt; /*color: #2a370d;*/&lt;br /&gt; font-size: 10px;&lt;br /&gt; font-weight: normal;&lt;br /&gt; text-decoration: none;&lt;br /&gt; cursor: pointer&lt;br /&gt; }&lt;br /&gt; .los_content a.los_losungtxt_link:hover {&lt;br /&gt; /*color: #477711;*/&lt;br /&gt; font-weight: normal;&lt;br /&gt; text-decoration: underline&lt;br /&gt; }&lt;br /&gt; &lt;br /&gt; /*Style Lehrtext*/&lt;br /&gt; .los_content .los_lehrtxt {&lt;br /&gt; font-size: 11px;&lt;br /&gt; margin-top: 5px&lt;br /&gt; }&lt;br /&gt; .los_content .los_lehrtxt_link {&lt;br /&gt; font-size: 10px;&lt;br /&gt; text-align: right&lt;br /&gt; }&lt;br /&gt; .los_content a.los_lehrtxt_link:link, .los_content a.los_lehrtxt_link:visited {&lt;br /&gt; /*color: #2a370d;*/&lt;br /&gt; font-size: 10px;&lt;br /&gt; font-weight: normal;&lt;br /&gt; text-decoration: none;&lt;br /&gt; cursor: pointer&lt;br /&gt; }&lt;br /&gt; .los_content a.los_lehrtxt_link:hover {&lt;br /&gt; /*color: #477711;*/&lt;br /&gt; font-weight: normal;&lt;br /&gt; text-decoration: underline&lt;br /&gt; }&lt;br /&gt; &lt;br /&gt; /*Style Info Link*/&lt;br /&gt; .los_content .los_info_link {&lt;br /&gt; font-size: 10px;&lt;br /&gt; }&lt;br /&gt; .los_content a.los_info_link:link, .los_content a.los_info_link:visited {&lt;br /&gt; /*color: #2a370d;*/&lt;br /&gt; font-weight: normal;&lt;br /&gt; text-decoration: none;&lt;br /&gt; cursor: pointer&lt;br /&gt; }&lt;br /&gt; .los_content a.los_info_link:hover {&lt;br /&gt; /*color: #477711;*/&lt;br /&gt; font-weight: normal;&lt;br /&gt; text-decoration: underline&lt;br /&gt; }&lt;br /&gt; &lt;br /&gt; /*Style externe Links*/&lt;br /&gt; .los_content .los_ext_links {&lt;br /&gt; font-size: 10px;&lt;br /&gt; }&lt;br /&gt; .los_content a.los_ext_links:link, .los_content a.los_ext_links:visited {&lt;br /&gt; /*color: #2a370d;*/&lt;br /&gt; font-weight: normal;&lt;br /&gt; text-decoration: none;&lt;br /&gt; cursor: pointer&lt;br /&gt; }&lt;br /&gt; .los_content a.los_ext_links:hover {&lt;br /&gt; /*color: #477711;*/&lt;br /&gt; font-weight: normal;&lt;br /&gt; text-decoration: underline&lt;br /&gt; }"
-					>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
 				</field>
 			</fieldset>
 			<fieldset name="advanced">
@@ -321,7 +306,7 @@
 					rows="3"
 				/>
 				<field
-					name="cache"
+					name="owncache"
 					type="list"
 					label="COM_MODULES_FIELD_CACHING_LABEL"
 					description="COM_MODULES_FIELD_CACHING_DESC"
@@ -337,12 +322,6 @@
 					description="COM_MODULES_FIELD_CACHE_TIME_DESC"
 					default="900"
 				/>
-				<field
-					name="cachemode"
-					type="hidden"
-					default="id">
-					<option value="static"></option>
-				</field>
 			</fieldset>
 		</fields>
 	</config>

@@ -9,14 +9,29 @@
 defined('_JEXEC') or die;
 
 JHtml::_('bootstrap.popover', '.losung', array('trigger' => 'manual'));
-Jhtml::_('bootstrap.tooltip');
+JHtml::_('bootstrap.tooltip');
+
+if ($params->get('use_css', 1))
+{
+	JHtml::_('stylesheet', 'mod_herrnhuter_losungen/losung.css', false, true, false);
+}
+
+if ($params->get('use_css', 1))
+{
+	JHtml::_('stylesheet', 'mod_herrnhuter_losungen/losung.css', false, true, false);
+}
+
 ?>
-<div id="losungen_<?php echo $module->id; ?>" class="losungen">
-	<?php if ($params->get('show_text', 1)) : ?>
-		<div class="introtext"><?php echo JText::_($params->get('text', 'MOD_HERRNHUTER_LOSUNGEN_INTROTEXT_DEFAULT')); ?></div>
-	<?php endif; ?>
-	<?php if ($params->get('show_date', 1)) : ?>
-		<div class="datum"><?php echo JHtml::_('date', '', JText::_($params->get('date_format', 'DATE_FORMAT_LC4'))); ?></div>
+<div id="losungen_<?php echo $module->id; ?>" class="losungen<?php echo $moduleclass_sfx; ?>">
+	<?php if ($params->get('show_text', 1) || $params->get('show_date', 1)) : ?>
+		<div class="introzeile">
+			<?php if ($params->get('show_text', 1)) : ?>
+				<span class="introtext"><?php echo JText::_($params->get('text', 'MOD_HERRNHUTER_LOSUNGEN_INTROTEXT_DEFAULT')); ?></span>
+			<?php endif; ?>
+			<?php if ($params->get('show_date', 1)) : ?>
+				<span class="datum"><?php echo JHtml::_('date', '', JText::_($params->get('date_format', 'DATE_FORMAT_LC4'))); ?></span>
+			<?php endif; ?>
+		</div>
 	<?php endif; ?>
 	<?php if ($params->get('show_sunday', 1) && $losung['Sonntag']) : ?>
 		<div class="sonntag"><?php echo $losung['Sonntag']; ?></div>
@@ -45,8 +60,8 @@ Jhtml::_('bootstrap.tooltip');
 			</ul>
 		</div>
 	<?php endif; ?>
-	<div class="small">
-		<a href="#" class="losung" onclick="jQuery(this).popover('toggle');return false;" data-placement="top" data-title="<?php echo JText::_('MOD_HERRNHUTER_LOSUNGEN_INFO'); ?>" data-content="<?php echo JText::_('MOD_HERRNHUTER_LOSUNGEN_INFO_POPOVER'); ?>">
+	<div class="copyright">
+		<a href="#" onclick="jQuery(this).popover('toggle');return false;" data-placement="top" data-title="<?php echo JText::_('MOD_HERRNHUTER_LOSUNGEN_INFO'); ?>" data-content="<?php echo JText::_('MOD_HERRNHUTER_LOSUNGEN_INFO_POPOVER'); ?>">
 			<?php echo JText::_('MOD_HERRNHUTER_LOSUNGEN_INFO'); ?>
 		</a>
 	</div>

@@ -34,6 +34,7 @@ abstract class ModHerrnhuterlosungenHelper
 			if ($xml = simplexml_load_file($file))
 			{
 				$index             = $date->dayofyear;
+				$index             = 3;
 				$losung            = (array) $xml->Losungen[(int) $index];
 				$losung['Sonntag'] = (string) $xml->Losungen[(int) $index]->Sonntag;
 
@@ -114,7 +115,7 @@ abstract class ModHerrnhuterlosungenHelper
 
 		if ($params->get('link_icon_class'))
 		{
-			$html = '<span class="' . $params->get('link_icon_class') . '"> </span> ';
+			$html = '<span class="icon ' . $params->get('link_icon_class') . '"> </span> ';
 		}
 
 		if ($params->get('link_mode', 1) == 1)
@@ -134,45 +135,5 @@ abstract class ModHerrnhuterlosungenHelper
 		}
 
 		return $html;
-	}
-
-	public function foo()
-	{
-		{
-			{
-				// CSS-Head
-				if ($css_use == "0")
-				{
-					$csshead = "<style type=\"text/css\">\n" . $losung_css . "\n</style>";
-					$document->addCustomTag($csshead);
-					$ausgabe = "<div class=\"los_" . $modid . "_content\">\n" . $ausgabe .= "</div>\n";
-				}
-				// CSS-Body
-				if ($css_use == "1")
-				{
-					$ausgabe = "<style type='text/css'>\n" . $losung_css . "</style>\n" . "<div class=\"los_" . $modid . "_content\">\n" . $ausgabe .= "</div>\n";
-				}
-				// CSS-Nein
-				if ($css_use == "2")
-				{
-					$ausgabe = "<div class=\"los_" . $modid . "_content\">\n" . $ausgabe .= "</div>\n";
-				}
-			}
-
-			if ($char_set == "UTF-8")
-			{
-				$ausgabe = utf8_encode($ausgabe);
-				echo $ausgabe;
-			}
-			else
-			{
-				echo $ausgabe;
-			}
-
-
-			// wenn /losung/heutigelosung nicht vorhanden Fehler ausgeben
-		}
-
-		return false;
 	}
 }

@@ -1,0 +1,108 @@
+/*Style innerer Modulrahmen*/
+.los_92_content {
+	font-size: 10px;
+	font-family: tahoma, Verdana, Arial, Helvetica, sans-serif;
+	margin: 0 0px;
+	width: auto
+}
+
+/*Style Wochentag/Datum*/
+.los_92_content .los_92_datum {
+	font-size: 11px;
+	font-style: italic;
+	text-align: center;
+	width: auto
+}
+
+/*Style Sonntagstext*/
+.los_92_content .los_92_sonntagtxt {
+	font-size: 10px;
+	font-style: italic;
+	margin-top: 5px
+}
+
+/*Style Losungstext*/
+.los_92_content .los_92_losungtxt {
+	font-size: 11px;
+	margin-top: 5px
+}
+
+.los_92_content .los_92_losungtxt_link {
+	font-size: 10px;
+	text-align: right
+}
+
+.los_92_content a.los_92_losungtxt_link:link, .los_92_content a.los_92_losungtxt_link:visited {
+	/*color: #2a370d;*/
+	font-size: 10px;
+	font-weight: normal;
+	text-decoration: none;
+	cursor: pointer
+}
+
+.los_92_content a.los_92_losungtxt_link:hover {
+	/*color: #477711;*/
+	font-weight: normal;
+	text-decoration: underline
+}
+
+/*Style Lehrtext*/
+.los_92_content .los_92_lehrtxt {
+	font-size: 11px;
+	margin-top: 5px
+}
+
+.los_92_content .los_92_lehrtxt_link {
+	font-size: 10px;
+	text-align: right
+}
+
+.los_92_content a.los_92_lehrtxt_link:link, .los_92_content a.los_92_lehrtxt_link:visited {
+	/*color: #2a370d;*/
+	font-size: 10px;
+	font-weight: normal;
+	text-decoration: none;
+	cursor: pointer
+}
+
+.los_92_content a.los_92_lehrtxt_link:hover {
+	/*color: #477711;*/
+	font-weight: normal;
+	text-decoration: underline
+}
+
+/*Style Info Link*/
+.los_92_content .los_92_info_link {
+	font-size: 10px;
+}
+
+.los_92_content a.los_92_info_link:link, .los_92_content a.los_92_info_link:visited {
+	/*color: #2a370d;*/
+	font-weight: normal;
+	text-decoration: none;
+	cursor: pointer
+}
+
+.los_92_content a.los_92_info_link:hover {
+	/*color: #477711;*/
+	font-weight: normal;
+	text-decoration: underline
+}
+
+/*Style externe Links*/
+.los_92_content .los_92_ext_links {
+	font-size: 10px;
+}
+
+.los_92_content a.los_92_ext_links:link, .los_92_content a.los_92_ext_links:visited {
+	/*color: #2a370d;*/
+	font-weight: normal;
+	text-decoration: none;
+	cursor: pointer
+}
+
+.los_92_content a.los_92_ext_links:hover {
+	/*color: #477711;*/
+	font-weight: normal;
+	text-decoration: underline
+}
