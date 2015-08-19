@@ -34,7 +34,6 @@ abstract class ModHerrnhuterlosungenHelper
 			if ($xml = simplexml_load_file($file))
 			{
 				$index             = $date->dayofyear;
-				$index             = 3;
 				$losung            = (array) $xml->Losungen[(int) $index];
 				$losung['Sonntag'] = (string) $xml->Losungen[(int) $index]->Sonntag;
 
