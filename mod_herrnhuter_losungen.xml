@@ -25,8 +25,8 @@
 				<field
 					name="path"
 					type="text"
-					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LOSUNGSPFAD_LABEL"
-					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LOSUNGSPFAD_DESC"
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_PATH_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_PATH_DESC"
 				/>
 				<field
 					name="char_set"
@@ -40,10 +40,10 @@
 					<option value="ISO-8859-1">ISO-8859-1</option>
 				</field>
 				<field
-					name="datum_on"
+					name="show_date"
 					type="radio"
-					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_DATUM_ON_LABEL"
-					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_DATUM_ON_DESC"
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_SHOW_DATE_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_SHOW_DATE_DESC"
 					class="btn-group btn-group-yesno"
 					default="1"
 					>
@@ -51,108 +51,105 @@
 					<option value="0">JNO</option>
 				</field>
 				<field
-					name="datumselect"
+					name="date_format"
 					type="dateformat"
-					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_DATUMSELECT_LABEL"
-					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_DATUMSELECT_DESC"
-					default="0"
-					showon="datum_on:1"
-					>
-					<option value="24">Zusatztext statt Datum verwenden</option>
-				</field>
-				<field
-					name="zusatztext_on"
-					type="radio"
-					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_ZUSATZTEXT_ON_LABEL"
-					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_ZUSATZTEXT_ON_DESC"
-					class="btn-group"
-					default="1"
-					>
-					<option value="0">MOD_HERRNHUTER_LOSUNGEN_FIELDS_ZUSATZTEXT_ON_OPTION_0</option>
-					<option value="1">MOD_HERRNHUTER_LOSUNGEN_FIELDS_ZUSATZTEXT_ON_OPTION_1</option>
-					<option value="2">MOD_HERRNHUTER_LOSUNGEN_FIELDS_ZUSATZTEXT_ON_OPTION_2</option>
-				</field>
-				<field
-					name="zusatztext"
-					type="text"
-					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_ZUSATZTEXT_LABEL"
-					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_ZUSATZTEXT_DESC"
-					default="Tageslosung von"
-					showon="zusatztext_on:1,2"
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_DATE_FORMAT_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_DATE_FORMAT_DESC"
+					default="DATE_FORMAT_LC4"
+					showon="show_date:1"
 				/>
 				<field
-					name="sonntag_on"
+					name="show_text"
 					type="radio"
-					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_SONNTAG_ON_LABEL"
-					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_SONNTAG_ON_DESC"
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_SHOW_INTROTEXT_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_SHOW_INTROTEXT_DESC"
+					class="btn-group btn-group-yesno"
+					default="1"
+					>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field
+					name="text"
+					type="text"
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_INTROTEXT_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_INTROTEXT_DESC"
+					showon="show_text:1,2"
+				/>
+				<field
+					name="show_sunday"
+					type="radio"
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_SHOW_SUNDAY_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_SHOW_SUNDAY_DESC"
+					class="btn-group btn-group-yesno"
+					default="1"
+					>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field
+					name="show_losungstext"
+					type="radio"
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_SHOW_LOSUNGSTEXT_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_SHOW_LOSUNGSTEXT_DESC"
+					class="btn-group btn-group-yesno"
+					default="1"
+					>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field
+					name="show_losungsvers"
+					type="radio"
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_SHOW_LOSUNGSVERS_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_SHOW_LOSUNGSVERS_DESC"
+					class="btn-group btn-group-yesno"
+					default="1"
+					>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field
+					name="show_lehrtext"
+					type="radio"
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_SHOW_LEHRTEXT_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_SHOW_LEHRTEXT_DESC"
+					class="btn-group btn-group-yesno"
+					default="1"
+					>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field
+					name="show_lehrtextvers"
+					type="radio"
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_SHOW_LEHRTEXTVERS_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_SHOW_LEHRTEXTVERS_DESC"
+					class="btn-group btn-group-yesno"
+					default="1"
+					>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field
+					name="link_scripture"
+					type="radio"
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_SCRIPTURE_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_SCRIPTURE_DESC"
 					class="btn-group"
-					default="2"
-					>
-					<option value="0">MOD_HERRNHUTER_LOSUNGEN_FIELDS_SONNTAG_ON_OPTION_0</option>
-					<option value="1">MOD_HERRNHUTER_LOSUNGEN_FIELDS_SONNTAG_ON_OPTION_1</option>
-					<option value="2">MOD_HERRNHUTER_LOSUNGEN_FIELDS_SONNTAG_ON_OPTION_2</option>
-				</field>
-				<field
-					name="losung_txt_on"
-					type="radio"
-					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LOSUNG_TXT_ON_LABEL"
-					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LOSUNG_TXT_ON_DESC"
-					class="btn-group btn-group-yesno"
 					default="1"
 					>
-					<option value="1">JYES</option>
+					<option value="1">MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_OPTION_1</option>
+					<option value="2">MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_OPTION_2</option>
 					<option value="0">JNO</option>
 				</field>
 				<field
-					name="losung_txt_vers_on"
-					type="radio"
-					label="Losung Bibelvers anzeigen"
-					description="Soll der Bibelvers zum Losungstext angezeigt werden?"
-					class="btn-group btn-group-yesno"
-					default="1"
-					>
-					<option value="1">JYES</option>
-					<option value="0">JNO</option>
-				</field>
-				<field
-					name="lehr_txt_on"
-					type="radio"
-					label="Lehrtext anzeigen"
-					description="Soll der Lehrtext angezeigt werden?"
-					class="btn-group btn-group-yesno"
-					default="1"
-					>
-					<option value="1">JYES</option>
-					<option value="0">JNO</option>
-				</field>
-				<field
-					name="lehr_txt_vers_on"
-					type="radio"
-					label="Lehrtext Bibelvers anzeigen"
-					description="Soll der Bibelvers zum Lehrtext angezeigt werden?"
-					class="btn-group btn-group-yesno"
-					default="1"
-					>
-					<option value="1">JYES</option>
-					<option value="0">JNO</option>
-				</field>
-				<field
-					name="bibel_on"
-					type="radio"
-					label="Bibelstellen verlinken"
-					description="Sollen die Bibelstellen der Losungen und des Lehrtextes mit bibelserver.com verlinkt werden?&lt;br /&gt;&lt;br /&gt;Die Bibelstelle wird in einem neuen Browserfenster geöffnet.&lt;br /&gt;&lt;br /&gt;Die Link-Grafik (s.u.) kommt hier nicht zur Verwendung."
-					class="btn-group btn-group-yesno"
-					default="1"
-					>
-					<option value="1">JYES</option>
-					<option value="0">JNO</option>
-				</field>
-				<field
-					name="bibel_version"
+					name="bible_version"
 					type="list"
 					default="LUT"
-					label="Bibelübersetzung"
-					description="Gewünschte Bibelübersetzung die im neuen Browserfenster benutzt werden soll?"
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_BIBLE_VERSION_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_BIBLE_VERSION_DESC"
+					showon="link_scripture:1,2"
 					>
 					<option value="LUT">Luther 1984</option>
 					<option value="ELB">Rev. Elberfelder</option>
@@ -164,123 +161,124 @@
 					<option value="GNB">Gute Nachricht Bibel</option>
 				</field>
 				<field
-					name="popup_bib_on"
-					type="radio"
-					label="Bibelserver-Anzeigeart"
-					description="Wie soll der verlinkte Bibleserver geöffnet werden?"
-					class="btn-group"
-					default="0"
-					>
-					<option value="0">Im neuen Browserfenster</option>
-					<option value="1">In PopUp-Fenster</option>
-					<option value="2">In der Lightbox</option>
-				</field>
-				<field
-					name="popup_bib_width"
+					name="popup_width"
 					type="text"
-					label="PopUp-Fenster Breite"
-					description="Bei Wahl:&lt;br /&gt;&lt;br /&gt;&lt;b&gt;Im neuen Browserfenster&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;werden die Höhen- und Breitenangaben ignoriert.&lt;br /&gt;&lt;br /&gt;Nur einen Zahlenwert verwenden, ohne (px) oder (%)&lt;br /&gt;&lt;br /&gt;Default = 900."
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_POPUP_WIDTH_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_POPUP_WIDTH_DESC"
 					filter="integer"
 					class="validate-numeric input-mini"
 					default="900"
+					showon="link_scripture:2"
 				/>
 				<field
-					name="popup_bib_height"
+					name="popup_height"
 					type="text"
-					label="PopUp-Fenster Höhe"
-					description="Bei Wahl:&lt;br /&gt;&lt;br /&gt;&lt;b&gt;Im neuen Browserfenster&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;werden die Höhen- und Breitenangaben ignoriert.&lt;br /&gt;&lt;br /&gt;Nur einen Zahlenwert verwenden, ohne (px) oder (%)&lt;br /&gt;&lt;br /&gt;Default = 600."
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_POPUP_HEIGHT_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_POPUP_HEIGHT_DESC"
 					filter="integer"
 					class="validate-numeric input-mini"
 					default="600"
+					showon="link_scripture:2"
 				/>
 				<field
-					name="links_on"
+					name="show_links"
 					type="radio"
-					label="externe Links anzeigen"
-					description="externe Links anzeigen?&lt;br /&gt;&lt;br /&gt;Default ist:&lt;br /&gt;1. Wort zum Tag (erf.de)&lt;br /&gt;2. Denk-Anstoß (erf.de)"
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_SHOW_LINKS_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_SHOW_LINKS_DESC"
 					class="btn-group"
-					default="2"
+					default="0"
 					>
-					<option value="0">Keinen Link anzeigen</option>
-					<option value="1">nur 1. Link anzeigen</option>
-					<option value="2">1. und 2. Link anzeigen</option>
+					<option value="1">MOD_HERRNHUTER_LOSUNGEN_FIELDS_SHOW_LINKS_OPTION_1</option>
+					<option value="2">MOD_HERRNHUTER_LOSUNGEN_FIELDS_SHOW_LINKS_OPTION_2</option>
+					<option value="0">JNO</option>
+				</field>
+				<field
+					name="link_ul_class"
+					type="text"
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_UL_CLASS_TITLE"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_UL_LIST_CLASS_DESC"
+					default="unstyled"
+					showon="show_links:1,2"
+					>
+					<option value="unstyled">MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_UL_CLASS_OPTION_UNSTYLED</option>
+					<option value="inline">MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_UL_CLASS_OPTION_INLINE</option>
+					<option value="nav nav-list">MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_UL_CLASS_OPTION_NAV_LIST</option>
+				</field>
+				<field
+					name="link_icon_class"
+					type="text"
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_ICON_CLASS_TITLE"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_ICON_CLASS_DESC"
+					showon="show_links:1,2"
+					>
+					<option value="icon-star">MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_ICON_CLASS_OPTION_STAR</option>
+				</field>
+				<field
+					name="link_mode"
+					type="radio"
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_MODE_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_MODE_DESC"
+					class="btn-group"
+					default="1"
+					showon="show_links:1,2"
+					>
+					<option value="1">MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_OPTION_1</option>
+					<option value="3">MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_OPTION_3</option>
 				</field>
 				<field
 					name="link1_url"
 					type="url"
-					label="1. Link URL"
-					description="Vollständige URL (mit http://) zur gewünschten ersten externen Website"
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK1_URL_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_URL_DESC"
 					default="http://www.erf.de/wortzumtag"
-					showon="links_on:1,2"
+					showon="show_links:1,2"
 				/>
 				<field
-					name="link1_titel"
+					name="link1_title"
 					type="text"
-					label="1. Link Titel"
-					description="Titel der ersten URL, der im Modul angezeigt wird."
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK1_TITLE_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_TITLE_DESC"
 					default="Wort zum Tag"
-					showon="links_on:1,2"
+					showon="show_links:1,2"
 				/>
 				<field
 					name="link2_url"
 					type="url"
-					label="2. Link URL"
-					description="Vollständige URL (mit http://) zur gewünschten zweiten externen Website"
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK2_URL_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_URL_DESC"
 					default="http://www.erf.de/anstoss"
-					showon="links_on:2"
+					showon="show_links:2"
 				/>
 				<field
-					name="link2_titel"
+					name="link2_title"
 					type="text"
-					label="2. Link Titel"
-					description="Titel der zweiten URL, der im Modul angezeigt wird."
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK2_TITLE_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_TITLE_DESC"
 					default="Denk-Anstoß"
-					showon="links_on:2"
+					showon="show_links:2"
 				/>
 				<field
-					name="links_line"
+					name="link_mode"
 					type="radio"
-					label="externe Links Ausrichtung"
-					description="Sollen die externen Links nebeneinander oder untereinander angezeigt werden?&lt;br /&gt;&lt;br /&gt;Untereinander ist sinnvoll, wenn der Linktitel viele Buchstaben enthält."
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_MODE_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_MODE_DESC"
 					class="btn-group"
-					default="0"
-					showon="links_on:1,2"
+					default="1"
+					showon="show_links:1,2"
 					>
-					<option value="0">nebeneinander</option>
-					<option value="1">untereinander</option>
+					<option value="1">MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_OPTION_1</option>
+					<option value="3">MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_OPTION_3</option>
 				</field>
 				<field
-					name="modal_rel_link_on"
-					type="radio"
-					label="Link-Anzeigeart"
-					description="Wie sollen die externen Links geöffnet werden?"
-					class="btn-group"
-					default="0"
-					showon="links_on:1,2"
-					>
-					<option value="0">Im neuen Browserfenster</option>
-					<option value="1">In der Lightbox</option>
-				</field>
-				<field
-					name="modal_rel_link_width"
+					name="modal_height"
 					type="text"
-					label="Lightbox Breite"
-					description="Bei Wahl:&lt;br /&gt;&lt;br /&gt;&lt;b&gt;Im neuen Browserfenster&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;werden die Höhen- und Breitenangaben ignoriert.&lt;br /&gt;&lt;br /&gt;Nur einen Zahlenwert verwenden, ohne (px) oder (%)&lt;br /&gt;&lt;br /&gt;Default = 900."
-					filter="integer"
-					class="validate-numeric input-mini"
-					default="900"
-					showon="links_on:1,2"
-				/>
-				<field
-					name="modal_rel_link_height"
-					type="text"
-					label="Lightbox Höhe"
-					description="Bei Wahl:&lt;br /&gt;&lt;br /&gt;&lt;b&gt;Im neuen Browserfenster&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;werden die Höhen- und Breitenangaben ignoriert.&lt;br /&gt;&lt;br /&gt;Nur einen Zahlenwert verwenden, ohne (px) oder (%)&lt;br /&gt;&lt;br /&gt;Default = 600."
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_MODAL_HEIGHT_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_MODAL_HEIGHT_DESC"
 					filter="integer"
 					class="validate-numeric input-mini"
 					default="600"
-					showon="links_on:1,2"
-				/>
+					showon="link_scripture:2"
+					/>
 				<field
 					name="pfeil_on"
 					type="radio"
@@ -288,7 +286,7 @@
 					description="Soll vor den Links eine Grafik angezeigt werden?"
 					class="btn-group btn-group-yesno"
 					default="1"
-					showon="links_on:1,2"
+					showon="show_links:1,2"
 					>
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>

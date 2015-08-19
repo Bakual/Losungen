@@ -33,262 +33,113 @@ abstract class ModHerrnhuterlosungenHelper
 		{
 			if ($xml = simplexml_load_file($file))
 			{
-				$index  = $date->dayofyear;
-				$losung = (array) $xml->Losungen[(int)$index];
-				unset ($losung['Sonntag']);
+				$index             = $date->dayofyear;
+				$losung            = (array) $xml->Losungen[(int) $index];
+				$losung['Sonntag'] = (string) $xml->Losungen[(int) $index]->Sonntag;
 
 				return $losung;
-				$suche = '/' . $date . '(.*)<\/Losungen>/U';
-				preg_match($suche, $arbeitsstring, $gefunden);
-				$arbeitsstring = utf8_decode($gefunden[1]);
-				// IE Fehler beseitigen
-				$arbeitsstring = str_replace('&apos;', '\'', $arbeitsstring);
+			}
+		}
 
-				// Datum anzeigen
-				if ($datum_on == 1)
-				{
-					$taglang      = array("Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag");
-					$tagkurz      = array("So", "Mo", "Di", "Mi", "Do", "Fr", "Sa");
-					$Monatlang    = array("", "Januar", "Februar", "M�rz", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember");
-					$MonatlangOE1 = array("", "J�nner", "Februar", "M�rz", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember");
-					$MonatlangOE2 = array("", "J�nner", "Feber", "M�rz", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember");
+		return false;
+	}
 
-					switch ($datumselect)
-					{
+	/**
+	 * @param  string  $text  Bibleverse
+	 *
+	 * @return string
+	 */
+	public static function formatText($text)
+	{
+		// In XML intro passages which state who is the speaker are formatted as such: /Jesus sprich:/
+		if (strpos($text, '/') !== 0)
+		{
+			return $text;
+		}
 
-						case 24:
-							//*  Zusatztext statt Datum verwenden
-							$datum = "";
-							break;
-						case 0:
-							//*  Dienstag, 1. Januar 2013
-							$datum = $taglang[date("w")] . ", " . date("d") . ". " . $Monatlang[date("n")] . " " . date("Y");
-							break;
-						case 1:
-							//*  Dienstag, 1. Januar 13
-							$datum = $taglang[date("w")] . ", " . date("d") . ". " . $Monatlang[date("n")] . " " . date("y");
-							break;
-						case 2:
-							//*  Di 1. Januar 2013
-							$datum = $tagkurz[date("w")] . " " . date("d") . ". " . $Monatlang[date("n")] . " " . date("Y");
-							break;
-						case 3:
-							//*  Di 1. Januar 13
-							$datum = $tagkurz[date("w")] . " " . date("d") . ". " . $Monatlang[date("n")] . " " . date("y");
-							break;
-						case 4:
-							//*  Dienstag, 1.01.2013
-							$datum = $taglang[date("w")] . ", " . date("d") . "." . date("m") . "." . date("Y");
-							break;
-						case 5:
-							//*  Dienstag, 1.01.13
-							$datum = $taglang[date("w")] . ", " . date("d") . "." . date("m") . "." . date("y");
-							break;
-						case 6:
-							//*  Di 1.01.2013
-							$datum = $tagkurz[date("w")] . " " . date("d") . "." . date("m") . "." . date("Y");
-							break;
-						case 7:
-							//*  Di 1.01.13
-							$datum = $tagkurz[date("w")] . " " . date("d") . "." . date("m") . "." . date("y");
-							break;
-						case 8:
-							//*  1. Januar 2013
-							$datum = date("d") . ". " . $Monatlang[date("n")] . " " . date("Y");
-							break;
-						case 9:
-							//*  1. Januar 13
-							$datum = $tagkurz[date("w")] . " " . date("d") . ". " . $Monatlang[date("n")] . " " . date("Y");
-							break;
-						case 10:
-							//*  1.01.2013
-							$datum = date("d") . "." . date("m") . "." . date("Y");
-							break;
-						case 11:
-							//*  1.01.13
-							$datum = date("d") . "." . date("m") . "." . date("y");
-							break;
-						case 12:
-							//*  Dienstag, 1. J�nner(Februar) 2013
-							$datum = $taglang[date("w")] . ", " . date("d") . ". " . $MonatlangOE1[date("n")] . " " . date("Y");
-							break;
-						case 13:
-							//*  Dienstag, 1. J�nner(Februar) 13
-							$datum = $taglang[date("w")] . ", " . date("d") . ". " . $MonatlangOE1[date("n")] . " " . date("y");
-							break;
-						case 14:
-							//*  Di 1. J�nner(Februar) 2013
-							$datum = $tagkurz[date("w")] . " " . date("d") . ". " . $MonatlangOE1[date("n")] . " " . date("Y");
-							break;
-						case 15:
-							//*  Di 1. J�nner(Februar) 13
-							$datum = $tagkurz[date("w")] . " " . date("d") . ". " . $MonatlangOE1[date("n")] . " " . date("y");
-							break;
-						case 16:
-							//*  1. J�nner(Februar) 2013
-							$datum = date("d") . ". " . $MonatlangOE1[date("n")] . " " . date("Y");
-							break;
-						case 17:
-							//*  1. J�nner(Februar) 13
-							$datum = date("d") . ". " . $MonatlangOE1[date("n")] . " " . date("y");
-							break;
-						case 18:
-							//*  Dienstag, 1. J�nner(Feber) 2013
-							$datum = $taglang[date("w")] . ", " . date("d") . ". " . $MonatlangOE2[date("n")] . " " . date("Y");
-							break;
-						case 19:
-							//*  Dienstag, 1. J�nner(Feber) 13
-							$datum = $taglang[date("w")] . ", " . date("d") . ". " . $MonatlangOE2[date("n")] . " " . date("y");
-							break;
-						case 20:
-							//*  Di 1. J�nner(Feber) 2013
-							$datum = $tagkurz[date("w")] . " " . date("d") . ". " . $MonatlangOE2[date("n")] . " " . date("Y");
-							break;
-						case 21:
-							//*  Di 1. J�nner(Feber) 13
-							$datum = $tagkurz[date("w")] . " " . date("d") . ". " . $MonatlangOE2[date("n")] . " " . date("y");
-							break;
-						case 22:
-							//*  1. J�nner(Feber) 2013
-							$datum = date("d") . ". " . $MonatlangOE2[date("n")] . " " . date("Y");
-							break;
-						case 23:
-							//*  1. J�nner(Feber) 13
-							$datum = date("d") . ". " . $MonatlangOE2[date("n")] . " " . date("y");
-							break;
-					}
+		$text = substr_replace($text, '<span class="sprecher">', 0, 1);
+		$text = str_replace('/', '</span>', $text);
 
-					// Zusatztext vor Datum?
-					if ($zusatztext_on >= 1)
-					{
-						if ($zusatztext_on == 1)
-						{
-							$datum = "\n<div class=\"los_" . $module->id . "_datum\">" . $zusatztext . " " . $datum . "</div>\n";
-						}
-						else
-						{
-							$datum = "\n<div class=\"los_" . $module->id . "_datum\">" . $datum . " " . $zusatztext . "</div>\n";
-						}
-					}
-					else
-					{
-						$datum = "\n<div class=\"los_" . $module->id . "_datum\">" . $datum . "</div>\n";
-					}
-				}
+		return $text;
+	}
 
-				// Sonntagtext suchen und Formate zuweisen </wtag>
-				preg_match('/<Wtag>(.*)<\/Wtag>/U', $arbeitsstring, $gefunden);
-				if ($sonntag_on >= 1 and $gefunden[1] == "Sonntag")
-				{
-					preg_match('/<Sonntag>(.*)<\/Sonntag>/U', $arbeitsstring, $gefunden);
-					$sonntag_txt = "<div class=\"los_" . $modid . "_sonntagtxt\">" . $gefunden[1] . "</div>\n";
-				}
+	/**
+	 * @param  string                     $scripture  Bibleverse
+	 * @param  \Joomla\Registry\Registry  $params     module parameters
+	 *
+	 * @return string
+	 */
+	public static function linkScripture($scripture, $params)
+	{
+		$url = 'http://www.bibleserver.com/text/' . $params->get('bible_version', 'LUT') . '/' . $scripture;
 
-				// Losungstext suchen und Formate zuweisen
-				preg_match('/<Losungstext>(.*)<\/Losungstext>/U', $arbeitsstring, $gefunden);
-				$losung_txt = str_replace(':/', ':<***>', $gefunden[1]);
-				$losung_txt = str_replace('/', '<i>', $losung_txt);
-				$losung_txt = str_replace(':<***>', '</i>:', $losung_txt);
-				$losung_txt = str_replace('#', '"', $losung_txt);
-				$losung_txt = "<div class=\"los_" . $modid . "_losungtxt\">" . $losung_txt . "</div>\n";
+		switch ($params->get('link_scripture', 1))
+		{
+			case 0:
+				return $scripture;
+			case 1:
+				$title = JText::_('MOD_HERRNHUTER_LOSUNGEN_SCRIPTURELINK_NEW_WINDOW');
 
-				// Losungstextlink suchen und Formate zuweisen
-				preg_match('/<Losungsvers>(.*)<\/Losungsvers>/U', $arbeitsstring, $gefunden);
-				$losung_txt_vers = $gefunden[1];
+				return '<a title="' . $title . '" href="' . $url . '" target="_blank" class="losungstext hasTooltip">'
+				. $scripture . '</a>';
+			case 2:
+				$title   = JText::_('MOD_HERRNHUTER_LOSUNGEN_SCRIPTURELINK_POPUP');
+				$width   = $params->get('popup_width', 900);
+				$height  = $params->get('popup_height', 600);
+				$onclick = "Popup=window.open('" . $url . "','popup','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,"
+					. 'width=' . $width . ',height=' . $height . ",left='+(screen.availWidth/2-(" . $width . "/2))+',top='+(screen.availHeight/2-(" . $height . "/2)));return false;";
 
-				// Lehrtext suchen und Formate zuweisen
-				preg_match('/<Lehrtext>(.*)<\/Lehrtext>/U', $arbeitsstring, $gefunden);
-				$lehr_txt = str_replace(':/', ':<***>', $gefunden[1]);
-				$lehr_txt = str_replace('/', '<i>', $lehr_txt);
-				$lehr_txt = str_replace(':<***>', '</i>:', $lehr_txt);
-				$lehr_txt = str_replace('#', '"', $lehr_txt);
-				$lehr_txt = "<div class=\"los_" . $modid . "_lehrtxt\">" . $lehr_txt . "</div>\n";
+				return '<a title="' . $title . '" href="#" onclick="' . $onclick . '" class="losungstext hasTooltip">'
+				. $scripture . '</a>';
+		}
+	}
 
-				// Lehrtextlink suchen und Formate zuweisen
-				preg_match('/<Lehrtextvers>(.*)<\/Lehrtextvers>/U', $arbeitsstring, $gefunden);
-				$lehr_txt_vers = $gefunden[1];
+	/**
+	 * @param  integer                    $index     Bibleverse
+	 * @param  \Joomla\Registry\Registry  $params    module parameters
+	 * @param  integer                    $moduleId  module ID
+	 *
+	 * @return string
+	 */
+	public static function linkExtern($index, $params, $moduleId)
+	{
+		if ($index !== 1 && $index !== 2)
+		{
+			return;
+		}
 
-				if ($bibel_on == 1)
-				{
-					if ($popup_bib_on == "0")
-					{ // neues Fenster
-						$losung_txt_vers = "<div class=\"los_" . $modid . "_losungtxt_link\"><a title=\"Bibelabschnitt im neuem Fenster �ffnen\" href=\"http://www.bibleserver.com/index.php?language=1&s=1#/text/$bibel_version/$losung_txt_vers\" target=\"_blank\" class=\"los_" . $modid . "_losungtxt_link\">$losung_txt_vers</a></div>\n";
-					}
-					if ($popup_bib_on == "1")
-					{ // PopUp
-						$losung_txt_vers = "<div class=\"los_" . $modid . "_losungtxt_link\"><a title=\"Bibelabschnitt im neuem Fenster �ffnen\" href=\"http://www.bibleserver.com/index.php?language=1&s=1#/text/$bibel_version/$losung_txt_vers\" target=\"_blank\" class=\"los_" . $modid . "_losungtxt_link\" onclick=\"Popup=window.open('http://www.bibleserver.com/index.php?language=1&s=1#/text/$bibel_version/$losung_txt_vers','popup','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=$popup_bib_width,height=$popup_bib_height,left='+(screen.availWidth/2-($popup_bib_width/2))+',top='+(screen.availHeight/2-($popup_bib_height/2))+'');return false;\">$losung_txt_vers</a></div>\n";
-					}
-					if ($popup_bib_on == "2")
-					{ // Lightbox
-						$losung_txt_vers = "<div class=\"los_" . $modid . "_losungtxt_link\"><a title=\"Bibelabschnitt im neuem Fenster �ffnen\" href=\"http://www.bibleserver.com/index.php?language=1&s=1#/text/$bibel_version/$losung_txt_vers\" class=\"modal los_" . $modid . "_losungtxt_link\" target=\"_blank\" $popup_bib>$losung_txt_vers</a></div>\n";
-					}
+		$url  = $params->get('link' . $index . '_url');
+		$text = $params->get('link' . $index . '_title');
+		$html = '';
 
-				}
-				else
-				{
-					$losung_txt_vers = "<div class=\"los_" . $modid . "_losungtxt_link\">$losung_txt_vers</div>\n";
-				}
+		if ($params->get('list_li_class'))
+		{
+			$return = '<span class="' . $params->get('link_icon_class') . '"></span> ';
+		}
 
-				if ($bibel_on == 1)
-				{
-					if ($popup_bib_on == "0")
-					{ // neues Fenster
-						$lehr_txt_vers = "<div class=\"los_" . $modid . "_lehrtxt_link\"><a title=\"Bibelabschnitt im neuem Fenster �ffnen\" href=\"http://www.bibleserver.com/index.php?language=1&s=1#/text/$bibel_version/$lehr_txt_vers\" target=\"_blank\" class=\"los_" . $modid . "_lehrtxt_link\">$lehr_txt_vers</a></div>\n";
-					}
-					if ($popup_bib_on == "1")
-					{ // PopUp
-						$lehr_txt_vers = "<div class=\"los_" . $modid . "_lehrtxt_link\"><a title=\"Bibelabschnitt im neuem Fenster �ffnen\" href=\"http://www.bibleserver.com/index.php?language=1&s=1#/text/$bibel_version/$lehr_txt_vers\" target=\"_blank\" class=\"los_" . $modid . "_lehrtxt_link\" onclick=\"Popup=window.open('http://www.bibleserver.com/index.php?language=1&s=1#/text/$bibel_version/$lehr_txt_vers','popup','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=$popup_bib_width,height=$popup_bib_height,left='+(screen.availWidth/2-($popup_bib_width/2))+',top='+(screen.availHeight/2-($popup_bib_height/2))+'');return false;\">$lehr_txt_vers</a></div>\n";
-					}
-					if ($popup_bib_on == "2")
-					{ // Lightbox
-						$lehr_txt_vers = "<div class=\"los_" . $modid . "_lehrtxt_link\"><a title=\"Bibelabschnitt im neuem Fenster �ffnen\" href=\"http://www.bibleserver.com/index.php?language=1&s=1#/text/$bibel_version/$lehr_txt_vers\" class=\"modal los_" . $modid . "_lehrtxt_link\" target=\"_blank\"$popup_bib>$lehr_txt_vers</a></div>\n";
-					}
+		if ($params->get('link_mode', 1) == 1)
+		{
+			$html .= '<a href="' . $url . '" target="_blank">' . $text . '</a>';
+		}
+		else
+		{
+			$id = 'losung_' . $moduleId . '_link_' . $index;
+			$params = array(
+				'title'  => $text,
+				'url'    => $url,
+				'height' => $params->get('modal_height', 600),
+			);
+			$html .= JHtml::_('bootstrap.renderModal', $id, $params);
+			$html .= '<a href="#' . $id . '" data-toggle="modal" >' . $text . '</a>';
+		}
 
-				}
-				else
-				{
-					$lehr_txt_vers = "<div class=\"los_" . $modid . "_lehrtxt_link\">$lehr_txt_vers</div>\n";
-				}
+		return $html;
+	}
 
-				// Sonntag �ber Datum anzeigen
-				if ($sonntag_on == 1)
-				{
-					$ausgabe .= $sonntag_txt;
-				}
-
-				// Datum anzeigen
-				if ($datum_on == 1)
-				{
-					$ausgabe .= $datum;
-				}
-
-				// Sonntag unter Datum anzeigen
-				if ($sonntag_on == 2)
-				{
-					$ausgabe .= $sonntag_txt;
-				}
-
-				// Losungtext anzeigen
-				if ($losung_txt_on == 1)
-				{
-					$ausgabe .= $losung_txt;
-					if ($losung_txt_vers_on == 1)
-					{
-						$ausgabe .= $losung_txt_vers;
-					}
-				}
-
-				// Lehrtext anzeigen
-				if ($lehr_txt_on == 1)
-				{
-					$ausgabe .= $lehr_txt;
-					if ($lehr_txt_vers_on == 1)
-					{
-						$ausgabe .= $lehr_txt_vers;
-					}
-				}
-
-
+	public function foo()
+	{
+		{
+			{
 				// Grafik anzeigen
 				if ($pfeil_on == 1)
 				{
@@ -403,6 +254,6 @@ abstract class ModHerrnhuterlosungenHelper
 			// wenn /losung/heutigelosung nicht vorhanden Fehler ausgeben
 		}
 
-		return true;
+		return false;
 	}
 }

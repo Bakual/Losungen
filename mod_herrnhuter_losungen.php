@@ -25,6 +25,7 @@ $losung = JModuleHelper::moduleCache($module, $params, $cacheparams);
 if (!$losung)
 {
 	echo JText::_('MOD_HERRNHUTER_LOSUNGEN_NO_FILE_FOUND');
+
 	return;
 }
 

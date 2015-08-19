@@ -44,9 +44,6 @@ class JFormFieldDateformat extends JFormFieldList
 			$options[$key]['text']  = JHtml::Date($date, JText::_($format), true);
 		}
 
-		// TODO: Maybe I can get rid of that option
-		$options = array_merge($options, parent::getOptions());
-
 		return $options;
 	}
 }
