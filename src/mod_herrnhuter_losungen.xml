@@ -2,7 +2,7 @@
 <extension type="module" version="3.4.0" client="site" method="upgrade">
 	<name>MOD_HERRNHUTER_LOSUNGEN</name>
 	<author>Thomas Hunziker, Dietmar Isenbart</author>
-	<creationDate>2015-08-17</creationDate>
+	<creationDate>2015-08-20</creationDate>
 	<copyright>(C) 2015</copyright>
 	<license>http://www.gnu.org/licenses/gpl.html</license>
 	<authorEmail>admin@sermonspeaker.net</authorEmail>
