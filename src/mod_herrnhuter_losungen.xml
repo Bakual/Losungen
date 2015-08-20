@@ -20,6 +20,11 @@
 	<media destination="mod_herrnhuter_losungen" folder="media">
 		<folder>css</folder>
 	</media>
+	<updateservers>
+		<server type="extension" priority="1" name="SermonSpeaker.net">
+			http://www.sermonspeaker.net/update/mod_herrnhuter_losungen.xml
+		</server>
+	</updateservers>
 	<config>
 		<fields name="params">
 			<fieldset
