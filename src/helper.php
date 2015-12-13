@@ -26,18 +26,23 @@ abstract class ModHerrnhuterlosungenHelper
 	 */
 	public static function getLosung($params)
 	{
-		$date = JFactory::getDate();
-		$file = JPATH_ROOT . '/' . trim($params->get('path'), '/') . '/Losungen Free ' . $date->year . '.xml';
+		$date    = JFactory::getDate();
+		$files   = array();
+		$files[] = JPATH_ROOT . '/' . trim($params->get('path'), '/') . '/Losungen ' . $date->year . '.xml';
+		$files[] = JPATH_ROOT . '/' . trim($params->get('path'), '/') . '/Losungen Free ' . $date->year . '.xml';
 
-		if (file_exists($file))
+		foreach ($files as $file)
 		{
-			if ($xml = simplexml_load_file($file))
+			if (file_exists($file))
 			{
-				$index             = $date->dayofyear;
-				$losung            = (array) $xml->Losungen[(int) $index];
-				$losung['Sonntag'] = (string) $xml->Losungen[(int) $index]->Sonntag;
+				if ($xml = simplexml_load_file($file))
+				{
+					$index             = $date->dayofyear;
+					$losung            = (array) $xml->Losungen[(int) $index];
+					$losung['Sonntag'] = (string) $xml->Losungen[(int) $index]->Sonntag;
 
-				return $losung;
+					return $losung;
+				}
 			}
 		}
 
