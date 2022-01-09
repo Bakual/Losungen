@@ -8,34 +8,21 @@
 
 defined('_JEXEC') or die();
 
+use Joomla\CMS\Installer\InstallerScript;
+
 /**
  * Class Mod_herrnhuter_losungenInstallerScript
  *
  * @since  1.0.0
  */
-class Mod_herrnhuter_losungenInstallerScript
+class Mod_herrnhuter_losungenInstallerScript extends InstallerScript
 {
 	/**
-	 * method to run before an install/update/uninstall method
+	 * Minimum Joomla! version required to install the extension
 	 *
-	 * @param   string                      $type    'install', 'update' or 'discover_install'
-	 * @param   JInstallerAdapterComponent  $parent  Installerobject
-	 *
-	 * @return  boolean  false will terminate the installation
+	 * @var    string
+	 * @since  2.0.0
 	 */
-	public function preflight($type, $parent)
-	{
-		$min_version = (string) $parent->get('manifest')->attributes()->version;
 
-		$jversion = new JVersion;
-
-		if (!$jversion->isCompatible($min_version))
-		{
-			JFactory::getApplication()->enqueueMessage(JText::sprintf('MOD_HERRNHUTER_LOSUNGEN_VERSION_UNSUPPORTED', $min_version), 'error');
-
-			return false;
-		}
-
-		return true;
-	}
+	protected $minimumJoomla = '4.0.0';
 }
