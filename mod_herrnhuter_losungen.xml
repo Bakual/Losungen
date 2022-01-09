@@ -188,7 +188,7 @@
 					name="link_ul_class"
 					type="text"
 					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_UL_CLASS_TITLE"
-					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_UL_LIST_CLASS_DESC"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_UL_CLASS_DESC"
 					default="unstyled"
 					showon="show_links:1,2"
 					>
@@ -272,7 +272,6 @@
 					name="modal_height"
 					type="text"
 					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_MODAL_HEIGHT_LABEL"
-					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_MODAL_HEIGHT_DESC"
 					filter="integer"
 					class="validate-numeric input-mini"
 					default="600"
