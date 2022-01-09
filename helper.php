@@ -8,6 +8,11 @@
 
 defined('_JEXEC') or die();
 
+use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
+use Joomla\Registry\Registry;
+
 /**
  * Helper class for Herrnhuter Losungen module
  *
@@ -18,15 +23,15 @@ abstract class ModHerrnhuterlosungenHelper
 	/**
 	 * Get Losung from XML
 	 *
-	 * @param   \Joomla\Registry\Registry  $params  module parameters
+	 * @param   Registry  $params  module parameters
 	 *
-	 * @return  array
+	 * @return  array|false
 	 *
 	 * @since   1.0
 	 */
 	public static function getLosung($params)
 	{
-		$date    = JFactory::getDate();
+		$date    = Factory::getDate();
 		$files   = array();
 		$files[] = JPATH_ROOT . '/' . trim($params->get('path'), '/') . '/Losungen ' . $date->year . '.xml';
 		$files[] = JPATH_ROOT . '/' . trim($params->get('path'), '/') . '/Losungen Free ' . $date->year . '.xml';
@@ -50,13 +55,15 @@ abstract class ModHerrnhuterlosungenHelper
 	}
 
 	/**
-	 * @param  string  $text  Bibleverse
+	 * @param   string  $text  Bibleverse
 	 *
 	 * @return string
+	 *
+	 * @since   1.0
 	 */
-	public static function formatText($text)
+	public static function formatText(string $text): string
 	{
-		// In XML intro passages which state who is the speaker are formatted as such: /Jesus sprich:/
+		// In XML intro passages which state who is the speaker are formatted as such: /Jesus spricht:/
 		if (strpos($text, '/') !== 0)
 		{
 			return $text;
@@ -69,12 +76,14 @@ abstract class ModHerrnhuterlosungenHelper
 	}
 
 	/**
-	 * @param  string                     $scripture  Bibleverse
-	 * @param  \Joomla\Registry\Registry  $params     module parameters
+	 * @param   string    $scripture  Bibleverse
+	 * @param   Registry  $params     module parameters
 	 *
 	 * @return string
+	 *
+	 * @since   1.0
 	 */
-	public static function linkScripture($scripture, $params)
+	public static function linkScripture(string $scripture, Registry $params)
 	{
 		$url = 'http://www.bibleserver.com/text/' . $params->get('bible_version', 'LUT') . '/' . $scripture;
 
@@ -83,34 +92,36 @@ abstract class ModHerrnhuterlosungenHelper
 			case 0:
 				return $scripture;
 			case 1:
-				$title = JText::_('MOD_HERRNHUTER_LOSUNGEN_SCRIPTURELINK_NEW_WINDOW');
+				$title = Text::_('MOD_HERRNHUTER_LOSUNGEN_SCRIPTURELINK_NEW_WINDOW');
 
 				return '<a title="' . $title . '" href="' . $url . '" target="_blank" class="losungstext hasTooltip">'
-				. $scripture . '</a>';
+					. $scripture . '</a>';
 			case 2:
-				$title   = JText::_('MOD_HERRNHUTER_LOSUNGEN_SCRIPTURELINK_POPUP');
+				$title   = Text::_('MOD_HERRNHUTER_LOSUNGEN_SCRIPTURELINK_POPUP');
 				$width   = $params->get('popup_width', 900);
 				$height  = $params->get('popup_height', 600);
 				$onclick = "Popup=window.open('" . $url . "','popup','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,"
 					. 'width=' . $width . ',height=' . $height . ",left='+(screen.availWidth/2-(" . $width . "/2))+',top='+(screen.availHeight/2-(" . $height . "/2)));return false;";
 
 				return '<a title="' . $title . '" href="#" onclick="' . $onclick . '" class="losungstext hasTooltip">'
-				. $scripture . '</a>';
+					. $scripture . '</a>';
 		}
 	}
 
 	/**
-	 * @param  integer                    $index     Bibleverse
-	 * @param  \Joomla\Registry\Registry  $params    module parameters
-	 * @param  integer                    $moduleId  module ID
+	 * @param   integer                    $index     Bibleverse
+	 * @param   \Joomla\Registry\Registry  $params    module parameters
+	 * @param   integer                    $moduleId  module ID
 	 *
 	 * @return string
+	 *
+	 * @since   1.0
 	 */
-	public static function linkExtern($index, $params, $moduleId)
+	public static function linkExtern(int $index, Registry $params, int $moduleId)
 	{
 		if ($index !== 1 && $index !== 2)
 		{
-			return;
+			return '';
 		}
 
 		$url  = $params->get('link' . $index . '_url');
@@ -119,7 +130,7 @@ abstract class ModHerrnhuterlosungenHelper
 
 		if ($params->get('link_icon_class'))
 		{
-			$html = '<span class="icon ' . $params->get('link_icon_class') . '"> </span> ';
+			$html = '<span class="fa ' . $params->get('link_icon_class') . '"> </span> ';
 		}
 
 		if ($params->get('link_mode', 1) == 1)
@@ -128,14 +139,14 @@ abstract class ModHerrnhuterlosungenHelper
 		}
 		else
 		{
-			$id = 'losung_' . $moduleId . '_link_' . $index;
+			$id     = 'losung_' . $moduleId . '_link_' . $index;
 			$params = array(
 				'title'  => $text,
 				'url'    => $url,
 				'height' => $params->get('modal_height', 600),
 			);
-			$html .= JHtml::_('bootstrap.renderModal', $id, $params);
-			$html .= '<a href="#' . $id . '" data-toggle="modal" >' . $text . '</a>';
+			$html   .= HtmlHelper::_('bootstrap.renderModal', $id, $params);
+			$html   .= '<a href="#' . $id . '" data-bs-toggle="modal" >' . $text . '</a>';
 		}
 
 		return $html;

@@ -8,28 +8,25 @@
 
 defined('_JEXEC') or die;
 
-JHtml::_('bootstrap.popover', '.losung', array('trigger' => 'manual'));
-JHtml::_('bootstrap.tooltip');
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
+
+HtmlHelper::_('bootstrap.popover', '.losungPopover');
+HtmlHelper::_('bootstrap.tooltip');
 
 if ($params->get('load_css', 1))
 {
-	JHtml::_('stylesheet', 'mod_herrnhuter_losungen/losung.css', false, true, false);
+	HtmlHelper::_('stylesheet', 'mod_herrnhuter_losungen/losung.css', array('relative' => true));
 }
-
-if ($params->get('load_icomoon'))
-{
-	JHtml::_('stylesheet', 'jui/icomoon.css', false, true, false);
-}
-
 ?>
 <div id="losungen_<?php echo $module->id; ?>" class="losungen<?php echo $moduleclass_sfx; ?>">
 	<?php if ($params->get('show_text', 1) || $params->get('show_date', 1)) : ?>
 		<div class="introzeile">
 			<?php if ($params->get('show_text', 1)) : ?>
-				<span class="introtext"><?php echo JText::_($params->get('text', 'MOD_HERRNHUTER_LOSUNGEN_INTROTEXT_DEFAULT')); ?></span>
+				<span class="introtext"><?php echo Text::_($params->get('text', 'MOD_HERRNHUTER_LOSUNGEN_INTROTEXT_DEFAULT')); ?></span>
 			<?php endif; ?>
 			<?php if ($params->get('show_date', 1)) : ?>
-				<span class="datum"><?php echo JHtml::_('date', '', JText::_($params->get('date_format', 'DATE_FORMAT_LC4'))); ?></span>
+				<span class="datum"><?php echo HtmlHelper::_('date', '', Text::_($params->get('date_format', 'DATE_FORMAT_LC4'))); ?></span>
 			<?php endif; ?>
 		</div>
 	<?php endif; ?>
@@ -61,8 +58,8 @@ if ($params->get('load_icomoon'))
 		</div>
 	<?php endif; ?>
 	<div class="copyright">
-		<a href="#" onclick="jQuery(this).popover('toggle');return false;" data-placement="top" data-title="<?php echo JText::_('MOD_HERRNHUTER_LOSUNGEN_INFO'); ?>" data-content="<?php echo JText::_('MOD_HERRNHUTER_LOSUNGEN_INFO_POPOVER'); ?>">
-			<?php echo JText::_('MOD_HERRNHUTER_LOSUNGEN_INFO'); ?>
+		<a role="button" class="losungPopover" data-bs-placement="top" data-bs-toggle="popover" title="<?php echo Text::_('MOD_HERRNHUTER_LOSUNGEN_INFO'); ?>" data-bs-content="<?php echo Text::_('MOD_HERRNHUTER_LOSUNGEN_INFO_POPOVER'); ?>">
+			<?php echo Text::_('MOD_HERRNHUTER_LOSUNGEN_INFO'); ?>
 		</a>
 	</div>
 </div>
