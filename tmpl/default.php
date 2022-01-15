@@ -8,6 +8,7 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 
@@ -18,6 +19,36 @@ if ($params->get('load_css', 1))
 {
 	HtmlHelper::_('stylesheet', 'mod_herrnhuter_losungen/losung.css', array('relative' => true));
 }
+
+$ajaxURL = 'index.php?option=com_ajax&module=herrnhuter_losungen&method=getLosung&format=json';
+Factory::getDocument()->addScriptDeclaration('
+	document.addEventListener(\'DOMContentLoaded\', function() {
+		var httpRequest;
+		document.getElementById(\'losungButtonPrev\').addEventListener(\'click\', changeLosung, \'prev\');
+		document.getElementById(\'losungButtonNext\').addEventListener(\'click\', changeLosung, \'next\');
+
+		function changeLosung(date) {
+			httpRequest = new XMLHttpRequest();
+			if (!httpRequest) {
+				alert(\'Giving up :( Cannot create an XMLHTTP instance\');
+				return false;
+			}
+			httpRequest.onreadystatechange = alertContents;
+			httpRequest.open(\'GET\', \'' . $ajaxURL . '\');
+			httpRequest.send();
+		}
+
+		function alertContents() {
+			if (httpRequest.readyState === XMLHttpRequest.DONE) {
+				if (httpRequest.status === 200) {
+					alert(httpRequest.responseText);
+				} else {
+					alert(\'There was a problem with the request.\');
+				}
+			}
+		}
+	})();
+');
 ?>
 <div id="losungen_<?php echo $module->id; ?>" class="losungen<?php echo $moduleclass_sfx; ?>">
 	<?php if ($params->get('show_text', 1) || $params->get('show_date', 1)) : ?>
@@ -26,7 +57,9 @@ if ($params->get('load_css', 1))
 				<span class="introtext"><?php echo Text::_($params->get('text', 'MOD_HERRNHUTER_LOSUNGEN_INTROTEXT_DEFAULT')); ?></span>
 			<?php endif; ?>
 			<?php if ($params->get('show_date', 1)) : ?>
+				<button type="button" id="losungButtonPrev" class="fa fa-chevron-left"></button>
 				<span class="datum"><?php echo HtmlHelper::_('date', '', Text::_($params->get('date_format', 'DATE_FORMAT_LC4'))); ?></span>
+				<button type="button" id="losungButtonNext" class="fa fa-chevron-right"></button>
 			<?php endif; ?>
 		</div>
 	<?php endif; ?>

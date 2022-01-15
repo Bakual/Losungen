@@ -9,6 +9,7 @@
 defined('_JEXEC') or die();
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\Helper\ModuleHelper;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\Registry\Registry;
@@ -20,6 +21,42 @@ use Joomla\Registry\Registry;
  */
 abstract class ModHerrnhuterlosungenHelper
 {
+	/**
+	 * Get Losung from XML
+	 *
+	 * @param   Registry  $params  module parameters
+	 *
+	 * @return  array|false
+	 *
+	 * @since   1.0
+	 */
+	public static function getLosungAjax()
+	{
+		$date    = Factory::getDate();
+		$module  = ModuleHelper::getModule('mod_herrnhuter_losungen');
+		$params  = new Registry($module->params);
+		$files   = array();
+		$files[] = JPATH_ROOT . '/' . trim($params->get('path'), '/') . '/Losungen ' . $date->year . '.xml';
+		$files[] = JPATH_ROOT . '/' . trim($params->get('path'), '/') . '/Losungen Free ' . $date->year . '.xml';
+
+		foreach ($files as $file)
+		{
+			if (file_exists($file))
+			{
+				if ($xml = simplexml_load_file($file))
+				{
+					$index             = $date->dayofyear;
+					$losung            = (array) $xml->Losungen[(int) $index];
+					$losung['Sonntag'] = (string) $xml->Losungen[(int) $index]->Sonntag;
+
+					return $losung;
+				}
+			}
+		}
+
+		return false;
+	}
+
 	/**
 	 * Get Losung from XML
 	 *
