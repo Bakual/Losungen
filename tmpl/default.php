@@ -24,30 +24,39 @@ $ajaxURL = 'index.php?option=com_ajax&module=herrnhuter_losungen&method=getLosun
 Factory::getDocument()->addScriptDeclaration('
 	document.addEventListener(\'DOMContentLoaded\', function() {
 		var httpRequest;
-		document.getElementById(\'losungButtonPrev\').addEventListener(\'click\', changeLosung, \'prev\');
-		document.getElementById(\'losungButtonNext\').addEventListener(\'click\', changeLosung, \'next\');
+		document.getElementById(\'losungButtonPrev\').addEventListener(\'click\', changeLosung);
+		document.getElementById(\'losungButtonNext\').addEventListener(\'click\', changeLosung);
 
-		function changeLosung(date) {
+		function changeLosung() {
 			httpRequest = new XMLHttpRequest();
 			if (!httpRequest) {
 				alert(\'Giving up :( Cannot create an XMLHTTP instance\');
 				return false;
 			}
+			let navigation = this.dataset.losungnavigation;
+			let date = document.getElementById(\'losungDatum\').dataset.losungdatum;
 			httpRequest.onreadystatechange = alertContents;
-			httpRequest.open(\'GET\', \'' . $ajaxURL . '\');
+			httpRequest.open(\'GET\', \'' . $ajaxURL . '&date=\'+date+\'&nav=\'+navigation);
 			httpRequest.send();
 		}
 
 		function alertContents() {
 			if (httpRequest.readyState === XMLHttpRequest.DONE) {
 				if (httpRequest.status === 200) {
-					alert(httpRequest.responseText);
+					let jsonResponse = JSON.parse(httpRequest.responseText);
+					let data = jsonResponse[\'data\'];
+					document.getElementById("losungDatum").dataset.losungdatum = data[\'DatumUS\'];
+					document.getElementById("losungDatum").innerHTML = data[\'DatumFormatiert\'];
+					document.getElementById("losungsText").innerHTML = data[\'LosungstextFormatiert\'];
+					document.getElementById("losungsVers").innerHTML = data[\'Losungsverslink\'];
+					document.getElementById("lehrText").innerHTML = data[\'LehrtextFormatiert\'];
+					document.getElementById("lehrTextVers").innerHTML = data[\'Lehrtextverslink\'];
 				} else {
 					alert(\'There was a problem with the request.\');
 				}
 			}
 		}
-	})();
+	});
 ');
 ?>
 <div id="losungen_<?php echo $module->id; ?>" class="losungen<?php echo $moduleclass_sfx; ?>">
@@ -57,9 +66,9 @@ Factory::getDocument()->addScriptDeclaration('
 				<span class="introtext"><?php echo Text::_($params->get('text', 'MOD_HERRNHUTER_LOSUNGEN_INTROTEXT_DEFAULT')); ?></span>
 			<?php endif; ?>
 			<?php if ($params->get('show_date', 1)) : ?>
-				<button type="button" id="losungButtonPrev" class="fa fa-chevron-left"></button>
-				<span class="datum"><?php echo HtmlHelper::_('date', '', Text::_($params->get('date_format', 'DATE_FORMAT_LC4'))); ?></span>
-				<button type="button" id="losungButtonNext" class="fa fa-chevron-right"></button>
+				<button type="button" id="losungButtonPrev" class="fa fa-chevron-left" data-losungnavigation="prev"></button>
+				<span id="losungDatum" class="datum" data-losungdatum="<?php echo HtmlHelper::_('date', '', 'Y-m-d'); ?>"><?php echo HtmlHelper::_('date', '', Text::_($params->get('date_format', 'DATE_FORMAT_LC4'))); ?></span>
+				<button type="button" id="losungButtonNext" class="fa fa-chevron-right" data-losungnavigation="next"></button>
 			<?php endif; ?>
 		</div>
 	<?php endif; ?>
@@ -67,16 +76,16 @@ Factory::getDocument()->addScriptDeclaration('
 		<div class="sonntag"><?php echo $losung['Sonntag']; ?></div>
 	<?php endif; ?>
 	<?php if ($params->get('show_losungstext', 1)) : ?>
-		<div class="losungstext"><?php echo ModHerrnhuterlosungenHelper::formatText($losung['Losungstext']); ?></div>
+		<div id="losungsText" class="losungstext"><?php echo ModHerrnhuterlosungenHelper::formatText($losung['Losungstext']); ?></div>
 	<?php endif; ?>
 	<?php if ($params->get('show_losungsvers', 1)) : ?>
-		<div class="losungsvers"><?php echo ModHerrnhuterlosungenHelper::linkScripture($losung['Losungsvers'], $params); ?></div>
+		<div id="losungsVers" class="losungsvers"><?php echo ModHerrnhuterlosungenHelper::linkScripture($losung['Losungsvers'], $params); ?></div>
 	<?php endif; ?>
 	<?php if ($params->get('show_lehrtext', 1)) : ?>
-		<div class="lehrtext"><?php echo ModHerrnhuterlosungenHelper::formatText($losung['Lehrtext']); ?></div>
+		<div id="lehrText" class="lehrtext"><?php echo ModHerrnhuterlosungenHelper::formatText($losung['Lehrtext']); ?></div>
 	<?php endif; ?>
 	<?php if ($params->get('show_lehrtextvers', 1)) : ?>
-		<div class="lehrtextvers"><?php echo ModHerrnhuterlosungenHelper::linkScripture($losung['Lehrtextvers'], $params); ?></div>
+		<div id="lehrTextVers" class="lehrtextvers"><?php echo ModHerrnhuterlosungenHelper::linkScripture($losung['Lehrtextvers'], $params); ?></div>
 	<?php endif; ?>
 	<?php if ($params->get('show_links')) : ?>
 		<div class="links">

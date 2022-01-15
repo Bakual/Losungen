@@ -32,12 +32,22 @@ abstract class ModHerrnhuterlosungenHelper
 	 */
 	public static function getLosungAjax()
 	{
-		$date    = Factory::getDate();
+		$input = Factory::getApplication()->input;
+
+		if ($input->get('nav') == 'prev')
+		{
+			$date = strtotime($input->get('date') . ' - 1 day');
+		}
+		else
+		{
+			$date = strtotime($input->get('date') . ' + 1 day');
+		}
+
 		$module  = ModuleHelper::getModule('mod_herrnhuter_losungen');
 		$params  = new Registry($module->params);
 		$files   = array();
-		$files[] = JPATH_ROOT . '/' . trim($params->get('path'), '/') . '/Losungen ' . $date->year . '.xml';
-		$files[] = JPATH_ROOT . '/' . trim($params->get('path'), '/') . '/Losungen Free ' . $date->year . '.xml';
+		$files[] = JPATH_ROOT . '/' . trim($params->get('path'), '/') . '/Losungen ' . date('Y', $date). '.xml';
+		$files[] = JPATH_ROOT . '/' . trim($params->get('path'), '/') . '/Losungen Free ' . date('Y', $date) . '.xml';
 
 		foreach ($files as $file)
 		{
@@ -45,9 +55,15 @@ abstract class ModHerrnhuterlosungenHelper
 			{
 				if ($xml = simplexml_load_file($file))
 				{
-					$index             = $date->dayofyear;
+					$index             = date('z', $date);
 					$losung            = (array) $xml->Losungen[(int) $index];
 					$losung['Sonntag'] = (string) $xml->Losungen[(int) $index]->Sonntag;
+					$losung['LosungstextFormatiert']     = self::formatText($losung['Losungstext']);
+					$losung['Losungsverslink']     = self::linkScripture($losung['Losungsvers'], $params);
+					$losung['LehrtextFormatiert']     = self::formatText($losung['Lehrtext']);
+					$losung['Lehrtextverslink']     = self::linkScripture($losung['Lehrtextvers'], $params);
+					$losung['DatumUS']         = HTMLHelper::_('date', $losung['Datum'], 'Y-m-d');
+					$losung['DatumFormatiert'] = HTMLHelper::_('date', $losung['Datum'], Text::_($params->get('date_format', 'DATE_FORMAT_LC4')));
 
 					return $losung;
 				}
@@ -79,9 +95,9 @@ abstract class ModHerrnhuterlosungenHelper
 			{
 				if ($xml = simplexml_load_file($file))
 				{
-					$index             = $date->dayofyear;
-					$losung            = (array) $xml->Losungen[(int) $index];
-					$losung['Sonntag'] = (string) $xml->Losungen[(int) $index]->Sonntag;
+					$index                     = $date->dayofyear;
+					$losung                    = (array) $xml->Losungen[(int) $index];
+					$losung['Sonntag']         = (string) $xml->Losungen[(int) $index]->Sonntag;
 
 					return $losung;
 				}
