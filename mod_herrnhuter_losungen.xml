@@ -19,6 +19,7 @@
 	</files>
 	<media destination="mod_herrnhuter_losungen" folder="media">
 		<folder>css</folder>
+		<folder>js</folder>
 	</media>
 	<updateservers>
 		<server type="extension" priority="1" name="SermonSpeaker.net">
