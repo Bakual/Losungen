@@ -88,6 +88,7 @@ abstract class ModHerrnhuterlosungenHelper
 		$files   = array();
 		$files[] = JPATH_ROOT . '/' . trim($params->get('path'), '/') . '/Losungen ' . $date->year . '.xml';
 		$files[] = JPATH_ROOT . '/' . trim($params->get('path'), '/') . '/Losungen Free ' . $date->year . '.xml';
+		$files[] = JPATH_ROOT . '/' . trim($params->get('path'), '/') . '/Losungen_Free_' . $date->year . '.xml';
 
 		foreach ($files as $file)
 		{
