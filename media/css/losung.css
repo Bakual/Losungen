@@ -1,32 +1,46 @@
 .losungen .introzeile {
-	font-size: 0.8em;
-	font-style: italic;
-	text-align: center;
+  font-size: 0.8em;
+  font-style: italic;
+  text-align: center;
 }
+
+.losungen .datum {
+  display: flex;
+}
+
+.losungen .datum span {
+  flex-grow: 1;
+}
+
 .losungen .sonntag {
-	font-size: 0.85em;
-	font-style: italic;
-	text-align: center;
-	margin-top: 5px;
+  font-size: 0.85em;
+  font-style: italic;
+  text-align: center;
+  margin-top: 5px;
 }
+
 .losungen .losungstext,
 .losungen .lehrtext {
-	font-size: 0.85em;
-	margin-top: 5px;
+  font-size: 0.85em;
+  margin-top: 5px;
 }
+
 .losungen .losungsvers,
 .losungen .lehrtextvers {
-	font-size: 0.8em;
-	text-align: right;
-	margin-top: 0;
+  font-size: 0.8em;
+  text-align: right;
+  margin-top: 0;
 }
+
 .losungen .links {
-	font-size: 0.8em;
+  font-size: 0.8em;
 }
+
 .losungen .copyright {
-	font-size: 0.8em;
-	text-align: center;
+  font-size: 0.8em;
+  text-align: center;
 }
+
 .losungen .copyright > a {
-	font-style: italic;
+  font-style: italic;
 }

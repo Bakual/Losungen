@@ -11,13 +11,19 @@ defined('_JEXEC') or die;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 
-/** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
-/** @var \Joomla\CMS\Application\SiteApplication $app */
-$wa = $app->getDocument()->getWebAssetManager();
-$wa->registerAndUseScript('mod_herrnhuter_losungen.changedate', 'mod_herrnhuter_losungen/change-date.js', [], ['defer' => true]);
-
 HtmlHelper::_('bootstrap.popover', '.losungPopover');
-HtmlHelper::_('bootstrap.tooltip');
+HtmlHelper::_('bootstrap.tooltip', '.hasTooltip');
+
+/** @var \Joomla\Registry\Registry $params */
+$datenav = ($params->get('date_nav', 1) && $params->get('show_date', 1));
+
+if ($datenav)
+{
+	/** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
+	/** @var \Joomla\CMS\Application\SiteApplication $app */
+	$wa = $app->getDocument()->getWebAssetManager();
+	$wa->registerAndUseScript('mod_herrnhuter_losungen.changedate', 'mod_herrnhuter_losungen/change-date.js', [], ['defer' => true]);
+}
 
 if ($params->get('load_css', 1))
 {
@@ -28,15 +34,22 @@ if ($params->get('load_css', 1))
 	<?php if ($params->get('show_text', 1) || $params->get('show_date', 1)) : ?>
 		<div class="introzeile">
 			<?php if ($params->get('show_text', 1)) : ?>
-				<span class="introtext"><?php echo Text::_($params->get('text', 'MOD_HERRNHUTER_LOSUNGEN_INTROTEXT_DEFAULT')); ?></span>
+				<div class="introtext"><?php echo Text::_($params->get('text', 'MOD_HERRNHUTER_LOSUNGEN_INTROTEXT_DEFAULT')); ?></div>
 			<?php endif; ?>
 			<?php if ($params->get('show_date', 1)) : ?>
-				<button type="button" id="losungButtonPrev" class="fa fa-chevron-left"
-						data-losungnavigation="prev"></button>
-				<span id="losungDatum" class="datum"
-					  data-losungdatum="<?php echo HtmlHelper::_('date', '', 'Y-m-d'); ?>"><?php echo HtmlHelper::_('date', '', Text::_($params->get('date_format', 'DATE_FORMAT_LC4'))); ?></span>
-				<button type="button" id="losungButtonNext" class="fa fa-chevron-right"
-						data-losungnavigation="next"></button>
+				<div class="datum">
+					<?php if ($datenav) : ?>
+						<button type="button" id="losungButtonPrev" class="fa fa-chevron-left"
+								data-losungnavigation="prev"></button>
+					<?php endif; ?>
+					<span id="losungDatum" data-losungdatum="<?php echo HtmlHelper::_('date', '', 'Y-m-d'); ?>">
+						<?php echo HtmlHelper::_('date', '', Text::_($params->get('date_format', 'DATE_FORMAT_LC4'))); ?>
+					</span>
+					<?php if ($datenav) : ?>
+						<button type="button" id="losungButtonNext" class="fa fa-chevron-right"
+								data-losungnavigation="next"></button>
+					<?php endif; ?>
+				</div>
 			<?php endif; ?>
 		</div>
 	<?php endif; ?>
@@ -72,10 +85,15 @@ if ($params->get('load_css', 1))
 		</div>
 	<?php endif; ?>
 	<div class="copyright">
-		<a role="button" class="losungPopover" data-bs-placement="top" data-bs-toggle="popover"
-		   title="<?php echo Text::_('MOD_HERRNHUTER_LOSUNGEN_INFO'); ?>"
-		   data-bs-content="<?php echo Text::_('MOD_HERRNHUTER_LOSUNGEN_INFO_POPOVER'); ?>">
+		<?php if ($params->get('copyright_popup', 1)) : ?>
+			<a role="button" class="losungPopover" data-bs-placement="top" data-bs-toggle="popover"
+			   title="<?php echo Text::_('MOD_HERRNHUTER_LOSUNGEN_INFO'); ?>"
+			   data-bs-content="<?php echo Text::_('MOD_HERRNHUTER_LOSUNGEN_INFO_POPOVER'); ?>">
+				<?php echo Text::_('MOD_HERRNHUTER_LOSUNGEN_INFO'); ?>
+			</a>
+		<?php else : ?>
 			<?php echo Text::_('MOD_HERRNHUTER_LOSUNGEN_INFO'); ?>
-		</a>
+			<?php echo Text::_('MOD_HERRNHUTER_LOSUNGEN_INFO_POPOVER'); ?>
+		<?php endif ?>
 	</div>
 </div>
