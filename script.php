@@ -8,6 +8,7 @@
 
 defined('_JEXEC') or die();
 
+use Joomla\CMS\Factory;
 use Joomla\CMS\Installer\Adapter\ComponentAdapter;
 use Joomla\CMS\Installer\InstallerScript;
 
@@ -25,12 +26,12 @@ class Mod_herrnhuter_losungenInstallerScript extends InstallerScript
 	 * @since  3.6
 	 */
 	protected $deleteFiles = array(
-		'modules/mod_herrnhuter_losungen/language/de-CH/de-CH.mod_herrnhuter_losungen.ini',
-		'modules/mod_herrnhuter_losungen/language/de-CH/de-CH.mod_herrnhuter_losungen.sys.ini',
-		'modules/mod_herrnhuter_losungen/language/de-DE/de-DE.mod_herrnhuter_losungen.ini',
-		'modules/mod_herrnhuter_losungen/language/de-DE/de-DE.mod_herrnhuter_losungen.sys.ini',
-		'modules/mod_herrnhuter_losungen/language/en-GB/en-GB.mod_herrnhuter_losungen.ini',
-		'modules/mod_herrnhuter_losungen/language/en-GB/en-GB.mod_herrnhuter_losungen.sys.ini',
+		'/modules/mod_herrnhuter_losungen/language/de-CH/de-CH.mod_herrnhuter_losungen.ini',
+		'/modules/mod_herrnhuter_losungen/language/de-CH/de-CH.mod_herrnhuter_losungen.sys.ini',
+		'/modules/mod_herrnhuter_losungen/language/de-DE/de-DE.mod_herrnhuter_losungen.ini',
+		'/modules/mod_herrnhuter_losungen/language/de-DE/de-DE.mod_herrnhuter_losungen.sys.ini',
+		'/modules/mod_herrnhuter_losungen/language/en-GB/en-GB.mod_herrnhuter_losungen.ini',
+		'/modules/mod_herrnhuter_losungen/language/en-GB/en-GB.mod_herrnhuter_losungen.sys.ini',
 	);
 
 	/**
