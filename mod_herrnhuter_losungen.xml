@@ -167,6 +167,13 @@
 					<option value="GNB">Gute Nachricht Bibel</option>
 				</field>
 				<field
+					name="bible_version_custom"
+					type="text"
+					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_BIBLE_VERSION_CUSTOM_LABEL"
+					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_BIBLE_VERSION_CUSTOM_DESC"
+					showon="link_scripture:1,2"
+				/>
+				<field
 					name="popup_width"
 					type="text"
 					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_POPUP_WIDTH_LABEL"

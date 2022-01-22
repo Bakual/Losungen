@@ -139,7 +139,8 @@ abstract class ModHerrnhuterlosungenHelper
 	 */
 	public static function linkScripture(string $scripture, Registry $params)
 	{
-		$url = 'http://www.bibleserver.com/text/' . $params->get('bible_version', 'LUT') . '/' . $scripture;
+		$translation = $params->get('bible_version_custom', $params->get('bible_version', 'LUT'));
+		$url = 'http://www.bibleserver.com/text/' . $translation . '/' . $scripture;
 
 		switch ($params->get('link_scripture', 1))
 		{
