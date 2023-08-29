@@ -86,6 +86,12 @@ abstract class ModHerrnhuterlosungenHelper
 	{
 		$date    = Factory::getDate();
 		$files   = array();
+
+		if ($params->get('path') === null)
+		{
+			return false;
+		}
+
 		$files[] = JPATH_ROOT . '/' . trim($params->get('path'), '/') . '/Losungen ' . $date->year . '.xml';
 		$files[] = JPATH_ROOT . '/' . trim($params->get('path'), '/') . '/Losungen Free ' . $date->year . '.xml';
 		$files[] = JPATH_ROOT . '/' . trim($params->get('path'), '/') . '/Losungen_Free_' . $date->year . '.xml';
