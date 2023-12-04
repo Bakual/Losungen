@@ -10,6 +10,7 @@ defined('_JEXEC') or die();
 
 use Joomla\CMS\Form\Field\ListField;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
 
 /**
  * Dateformat Field class.
@@ -42,7 +43,7 @@ class JFormFieldDateformat extends ListField
 		foreach ($dateformats AS $key => $format)
 		{
 			$options[$key]['value'] = $format;
-			$options[$key]['text']  = HTMLHelper::date($date, JText::_($format), true);
+			$options[$key]['text']  = HTMLHelper::date($date, Text::_($format), true);
 		}
 
 		return $options;
