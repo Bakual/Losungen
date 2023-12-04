@@ -39,15 +39,15 @@ if ($params->get('load_css', 1))
 			<?php if ($params->get('show_date', 1)) : ?>
 				<div class="datum">
 					<?php if ($datenav) : ?>
-						<button type="button" id="losungButtonPrev" class="fa fa-chevron-left"
-								data-losungnavigation="prev"></button>
+						<button type="button" id="losungButtonPrev" class="btn btn-secondary btn-sm"
+								data-losungnavigation="prev"><span class="fa fa-chevron-left"></span></button>
 					<?php endif; ?>
 					<span id="losungDatum" data-losungdatum="<?php echo HtmlHelper::_('date', '', 'Y-m-d'); ?>">
 						<?php echo HtmlHelper::_('date', '', Text::_($params->get('date_format', 'DATE_FORMAT_LC4'))); ?>
 					</span>
 					<?php if ($datenav) : ?>
-						<button type="button" id="losungButtonNext" class="fa fa-chevron-right"
-								data-losungnavigation="next"></button>
+						<button type="button" id="losungButtonNext" class="btn btn-secondary btn-sm"
+								data-losungnavigation="next"><span class="fa fa-chevron-right"></span></button>
 					<?php endif; ?>
 				</div>
 			<?php endif; ?>
