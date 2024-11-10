@@ -19,8 +19,9 @@
       }
       let navigation = this.dataset.losungnavigation;
       let date = document.getElementById('losungDatum').dataset.losungdatum;
+      let itemid = document.getElementById('losungDatum').dataset.menuitem;
       httpRequest.onreadystatechange = alertContents;
-      httpRequest.open('GET', ajaxURL + '&date=' + date + '&nav=' + navigation);
+      httpRequest.open('GET', ajaxURL + '&date=' + date + '&nav=' + navigation + '&Itemid=' + itemid);
       httpRequest.send();
     }
 
@@ -35,6 +36,7 @@
           document.getElementById("losungsVers").innerHTML = data['Losungsverslink'];
           document.getElementById("lehrText").innerHTML = data['LehrtextFormatiert'];
           document.getElementById("lehrTextVers").innerHTML = data['Lehrtextverslink'];
+          document.getElementById("sonntag").innerHTML = '';
         } else {
           alert('There was a problem with the request.');
         }

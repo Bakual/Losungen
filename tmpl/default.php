@@ -8,6 +8,7 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 
@@ -24,6 +25,8 @@ if ($datenav)
 	$wa = $app->getDocument()->getWebAssetManager();
 	$wa->registerAndUseScript('mod_herrnhuter_losungen.changedate', 'mod_herrnhuter_losungen/change-date.js', [], ['defer' => true]);
 }
+
+$Itemid = Factory::getApplication()->input->get('Itemid');
 
 if ($params->get('load_css', 1))
 {
@@ -42,7 +45,7 @@ if ($params->get('load_css', 1))
 						<button type="button" id="losungButtonPrev" class="btn btn-secondary btn-sm"
 								data-losungnavigation="prev"><span class="fa fa-chevron-left"></span></button>
 					<?php endif; ?>
-					<span id="losungDatum" data-losungdatum="<?php echo HtmlHelper::_('date', '', 'Y-m-d'); ?>">
+					<span id="losungDatum" data-losungdatum="<?php echo HtmlHelper::_('date', '', 'Y-m-d'); ?>" data-menuitem="<?php echo $Itemid;?>">
 						<?php echo HtmlHelper::_('date', '', Text::_($params->get('date_format', 'DATE_FORMAT_LC4'))); ?>
 					</span>
 					<?php if ($datenav) : ?>
@@ -54,7 +57,7 @@ if ($params->get('load_css', 1))
 		</div>
 	<?php endif; ?>
 	<?php if ($params->get('show_sunday', 1) && $losung['Sonntag']) : ?>
-		<div class="sonntag"><?php echo $losung['Sonntag']; ?></div>
+		<div id="sonntag" class="sonntag"><?php echo $losung['Sonntag']; ?></div>
 	<?php endif; ?>
 	<?php if ($params->get('show_losungstext', 1)) : ?>
 		<div id="losungsText"
