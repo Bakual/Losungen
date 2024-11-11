@@ -56,7 +56,7 @@ if ($params->get('load_css', 1))
 			<?php endif; ?>
 		</div>
 	<?php endif; ?>
-	<?php if ($params->get('show_sunday', 1) && $losung['Sonntag']) : ?>
+	<?php if ($params->get('show_sunday', 1)) : ?>
 		<div id="sonntag" class="sonntag"><?php echo $losung['Sonntag']; ?></div>
 	<?php endif; ?>
 	<?php if ($params->get('show_losungstext', 1)) : ?>
