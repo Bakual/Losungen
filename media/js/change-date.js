@@ -36,7 +36,7 @@
           document.getElementById("losungsVers").innerHTML = data['Losungsverslink'];
           document.getElementById("lehrText").innerHTML = data['LehrtextFormatiert'];
           document.getElementById("lehrTextVers").innerHTML = data['Lehrtextverslink'];
-          document.getElementById("sonntag").innerHTML = '';
+          document.getElementById("sonntag").innerHTML = data['Sonntag'];
         } else {
           alert('There was a problem with the request.');
         }
