@@ -4,17 +4,19 @@
 	<author>Thomas Hunziker</author>
 	<creationDate>2024-11-11</creationDate>
 	<copyright>(C) 2024</copyright>
-	<license>http://www.gnu.org/licenses/gpl.html</license>
+	<license>https://www.gnu.org/licenses/gpl.html</license>
 	<authorEmail>admin@sermonspeaker.net</authorEmail>
-	<authorUrl>http://www.sermonspeaker.net</authorUrl>
+	<authorUrl>https://www.sermonspeaker.net</authorUrl>
 	<version>2.0.6</version>
 	<description>MOD_HERRNHUTER_LOSUNGEN_XML_DESCRIPTION</description>
+	<namespace path="/">Sermonspeaker\Module\HerrnhuterLosungen</namespace>
 	<scriptfile>script.php</scriptfile>
 	<files>
-		<filename module="mod_herrnhuter_losungen">mod_herrnhuter_losungen.php</filename>
-		<filename>helper.php</filename>
+		<folder>Dispatcher</folder>
+		<folder>Field</folder>
+		<folder>Helper</folder>
 		<folder>language</folder>
-		<folder>fields</folder>
+		<folder module="mod_herrnhuter_losungen">services</folder>
 		<folder>tmpl</folder>
 	</files>
 	<media destination="mod_herrnhuter_losungen" folder="media">
@@ -30,8 +32,8 @@
 		<fields name="params">
 			<fieldset
 				name="basic"
-				addfieldpath="modules/mod_herrnhuter_losungen/fields"
-				>
+				addfieldprefix="Sermonspeaker\Module\HerrnhuterLosungen\Site\Field"
+			>
 
 				<field
 					name="path"
@@ -250,7 +252,7 @@
 					type="url"
 					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK1_URL_LABEL"
 					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_URL_DESC"
-					default="http://www.erf.de/wortzumtag"
+					default="https://www.erf.de/wortzumtag"
 					showon="show_links:1,2"
 				/>
 				<field
@@ -266,7 +268,7 @@
 					type="url"
 					label="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK2_URL_LABEL"
 					description="MOD_HERRNHUTER_LOSUNGEN_FIELDS_LINK_URL_DESC"
-					default="http://www.erf.de/anstoss"
+					default="https://www.erf.de/anstoss"
 					showon="show_links:2"
 				/>
 				<field

@@ -11,11 +11,16 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
+use Sermonspeaker\Module\HerrnhuterLosungen\Site\Helper\HerrnhuterLosungenHelper;
 
 HtmlHelper::_('bootstrap.popover', '.losungPopover');
 HtmlHelper::_('bootstrap.tooltip', '.hasTooltip');
 
-/** @var \Joomla\Registry\Registry $params */
+/**
+ * @var array                     $losung
+ * @var \Joomla\Registry\Registry $params
+ * @var stdClass                  $module
+ */
 $datenav = ($params->get('date_nav', 1) && $params->get('show_date', 1));
 
 if ($datenav)
@@ -33,7 +38,7 @@ if ($params->get('load_css', 1))
 	HtmlHelper::_('stylesheet', 'mod_herrnhuter_losungen/losung.css', array('relative' => true));
 }
 ?>
-<div id="losungen_<?php echo $module->id; ?>" class="losungen<?php echo $moduleclass_sfx; ?>">
+<div id="losungen_<?php echo $module->id; ?>" class="losungen">
 	<?php if ($params->get('show_text', 1) || $params->get('show_date', 1)) : ?>
 		<div class="introzeile">
 			<?php if ($params->get('show_text', 1)) : ?>
@@ -61,28 +66,28 @@ if ($params->get('load_css', 1))
 	<?php endif; ?>
 	<?php if ($params->get('show_losungstext', 1)) : ?>
 		<div id="losungsText"
-			 class="losungstext"><?php echo ModHerrnhuterlosungenHelper::formatText($losung['Losungstext']); ?></div>
+			 class="losungstext"><?php echo HerrnhuterLosungenHelper::formatText($losung['Losungstext']); ?></div>
 	<?php endif; ?>
 	<?php if ($params->get('show_losungsvers', 1)) : ?>
 		<div id="losungsVers"
-			 class="losungsvers"><?php echo ModHerrnhuterlosungenHelper::linkScripture($losung['Losungsvers'], $params); ?></div>
+			 class="losungsvers"><?php echo HerrnhuterLosungenHelper::linkScripture($losung['Losungsvers'], $params); ?></div>
 	<?php endif; ?>
 	<?php if ($params->get('show_lehrtext', 1)) : ?>
 		<div id="lehrText"
-			 class="lehrtext"><?php echo ModHerrnhuterlosungenHelper::formatText($losung['Lehrtext']); ?></div>
+			 class="lehrtext"><?php echo HerrnhuterLosungenHelper::formatText($losung['Lehrtext']); ?></div>
 	<?php endif; ?>
 	<?php if ($params->get('show_lehrtextvers', 1)) : ?>
 		<div id="lehrTextVers"
-			 class="lehrtextvers"><?php echo ModHerrnhuterlosungenHelper::linkScripture($losung['Lehrtextvers'], $params); ?></div>
+			 class="lehrtextvers"><?php echo HerrnhuterLosungenHelper::linkScripture($losung['Lehrtextvers'], $params); ?></div>
 	<?php endif; ?>
 	<?php if ($params->get('show_links')) : ?>
 		<div class="links">
 			<ul class="<?php echo $params->get('link_ul_class'); ?>">
 				<?php if ($params->get('link1_url') and $params->get('link1_title')) : ?>
-					<li><?php echo ModHerrnhuterlosungenHelper::linkExtern(1, $params, $module->id); ?></li>
+					<li><?php echo HerrnhuterLosungenHelper::linkExtern(1, $params, $module->id); ?></li>
 				<?php endif; ?>
 				<?php if (($params->get('show_links') == 2) and $params->get('link2_url') and $params->get('link2_title')) : ?>
-					<li><?php echo ModHerrnhuterlosungenHelper::linkExtern(2, $params, $module->id); ?></li>
+					<li><?php echo HerrnhuterLosungenHelper::linkExtern(2, $params, $module->id); ?></li>
 				<?php endif; ?>
 			</ul>
 		</div>

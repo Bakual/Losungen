@@ -1,12 +1,12 @@
 <?php
 /**
- * @package         HerrnhuterLosungen
- * @author          Thomas Hunziker <admin@sermonspeaker.net>
- * @copyright   (C) 2022 - Thomas Hunziker
- * @license         http://www.gnu.org/licenses/gpl.html
+ * @package     HerrnhuterLosungen
+ * @author      Thomas Hunziker <admin@sermonspeaker.net>
+ * @copyright   © 2025 - Thomas Hunziker
+ * @license     http://www.gnu.org/licenses/gpl.html
  **/
 
-defined('_JEXEC') or die();
+namespace Sermonspeaker\Module\HerrnhuterLosungen\Site\Helper;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Helper\ModuleHelper;
@@ -14,23 +14,24 @@ use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\Registry\Registry;
 
+defined('_JEXEC') or die();
+
 /**
  * Helper class for Herrnhuter Losungen module
  *
  * @since  1.0
  */
-abstract class ModHerrnhuterlosungenHelper
+class HerrnhuterLosungenHelper
 {
 	/**
 	 * Get Losung from XML
 	 *
-	 * @param   Registry  $params  module parameters
-	 *
 	 * @return  array|false
 	 *
+	 * @throws \Exception
 	 * @since   1.0
 	 */
-	public static function getLosungAjax()
+	public static function getLosungAjax(): false|array
 	{
 		$input = Factory::getApplication()->input;
 
@@ -77,13 +78,13 @@ abstract class ModHerrnhuterlosungenHelper
 	/**
 	 * Get Losung from XML
 	 *
-	 * @param   Registry  $params  module parameters
+	 * @param Registry $params module parameters
 	 *
 	 * @return  array|false
 	 *
 	 * @since   1.0
 	 */
-	public static function getLosung($params)
+	public static function getLosung(Registry $params): false|array
 	{
 		$date  = Factory::getDate();
 		$files = array();
@@ -121,7 +122,7 @@ abstract class ModHerrnhuterlosungenHelper
 	public static function formatText(string $text): string
 	{
 		// In XML intro passages which state who is the speaker are formatted as such: /Jesus spricht:/
-		if (strpos($text, '/') !== 0)
+		if (!str_starts_with($text, '/'))
 		{
 			return $text;
 		}
@@ -140,10 +141,10 @@ abstract class ModHerrnhuterlosungenHelper
 	 *
 	 * @since   1.0
 	 */
-	public static function linkScripture(string $scripture, Registry $params)
+	public static function linkScripture(string $scripture, Registry $params): string
 	{
 		$translation = $params->get('bible_version_custom', $params->get('bible_version', 'LUT'));
-		$url = 'http://www.bibleserver.com/' . $translation . '/' . $scripture;
+		$url = 'https://www.bibleserver.com/' . $translation . '/' . $scripture;
 
 		switch ($params->get('link_scripture', 1))
 		{
@@ -164,6 +165,8 @@ abstract class ModHerrnhuterlosungenHelper
 				return '<a title="' . $title . '" href="#" onclick="' . $onclick . '" class="losungstext hasTooltip">'
 					. $scripture . '</a>';
 		}
+
+		return '';
 	}
 
 	/**
@@ -175,7 +178,7 @@ abstract class ModHerrnhuterlosungenHelper
 	 *
 	 * @since   1.0
 	 */
-	public static function linkExtern(int $index, Registry $params, int $moduleId)
+	public static function linkExtern(int $index, Registry $params, int $moduleId): string
 	{
 		if ($index !== 1 && $index !== 2)
 		{

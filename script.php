@@ -32,6 +32,8 @@ class Mod_herrnhuter_losungenInstallerScript extends InstallerScript
 		'/modules/mod_herrnhuter_losungen/language/de-DE/de-DE.mod_herrnhuter_losungen.sys.ini',
 		'/modules/mod_herrnhuter_losungen/language/en-GB/en-GB.mod_herrnhuter_losungen.ini',
 		'/modules/mod_herrnhuter_losungen/language/en-GB/en-GB.mod_herrnhuter_losungen.sys.ini',
+		'/modules/mod_herrnhuter_losungen/mod_herrnhuter_losungen.php',
+		'/modules/mod_herrnhuter_losungen/helper.php',
 	);
 
 	/**
@@ -41,7 +43,7 @@ class Mod_herrnhuter_losungenInstallerScript extends InstallerScript
 	 * @since  2.0.0
 	 */
 
-	protected $minimumJoomla = '4.0.0';
+	protected $minimumJoomla = '6.0.0';
 
 	/**
 	 * Function to perform changes during postflight
