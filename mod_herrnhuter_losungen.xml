@@ -2,12 +2,12 @@
 <extension type="module" version="5.0" client="site" method="upgrade">
 	<name>MOD_HERRNHUTER_LOSUNGEN</name>
 	<author>Thomas Hunziker</author>
-	<creationDate>2024-11-11</creationDate>
-	<copyright>(C) 2024</copyright>
+	<creationDate>2025-11-27</creationDate>
+	<copyright>(C) 2025</copyright>
 	<license>https://www.gnu.org/licenses/gpl.html</license>
 	<authorEmail>admin@sermonspeaker.net</authorEmail>
 	<authorUrl>https://www.sermonspeaker.net</authorUrl>
-	<version>2.0.6</version>
+	<version>3.0.0</version>
 	<description>MOD_HERRNHUTER_LOSUNGEN_XML_DESCRIPTION</description>
 	<namespace path="/">Sermonspeaker\Module\HerrnhuterLosungen</namespace>
 	<scriptfile>script.php</scriptfile>
