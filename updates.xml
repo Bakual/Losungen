@@ -5,6 +5,25 @@
 		<description>Losungen Modul</description>
 		<element>mod_herrnhuter_losungen</element>
 		<type>module</type>
+		<version>3.0.0</version>
+		<downloads>
+			<downloadurl type="full" format="zip">
+				https://github.com/Bakual/Losungen/archive/refs/tags/v3.0.0.zip
+			</downloadurl>
+		</downloads>
+		<tags>
+			<tag>stable</tag>
+		</tags>
+		<maintainer>Thomas Hunziker</maintainer>
+		<maintainerurl>https://www.sermonspeaker.net/</maintainerurl>
+		<targetplatform name="joomla" version="6.[01234]"/>
+		<client>0</client>
+	</update>
+	<update>
+		<name>Losungen Modul</name>
+		<description>Losungen Modul</description>
+		<element>mod_herrnhuter_losungen</element>
+		<type>module</type>
 		<version>2.0.6</version>
 		<downloads>
 			<downloadurl type="full" format="zip">
